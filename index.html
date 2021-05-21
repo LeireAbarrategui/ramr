@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -73,17 +73,17 @@
 
 <div id="ramr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ramr" class="anchor"></a>ramr</h1></div>
+<a href="#ramr" class="anchor" aria-hidden="true"></a>ramr</h1></div>
 
 </div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
+<a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
 <p><em><code>ramr</code></em> is an R package for detection of low-frequency aberrant methylation events in large datasets obtained by methylation profiling using array or high-throughput bisulfite sequencing. In addition, package provides functions to visualize found aberrantly methylated regions (AMRs), and to generate sets of all possible regions to be used as reference sets for enrichment analysis.</p>
 <p>This readme contains condensed info on <em><code>ramr</code></em> usage. For more, please check function-specific help pages and vignettes.</p>
 <div id="current-features" class="section level2">
 <h2 class="hasAnchor">
-<a href="#current-features" class="anchor"></a>Current Features</h2>
+<a href="#current-features" class="anchor" aria-hidden="true"></a>Current Features</h2>
 <ul>
 <li>Identification of aberrantly methylated regions (AMRs)</li>
 <li>AMR visualization</li>
@@ -93,22 +93,19 @@
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<div id="install-via-bioconductor-devel-only" class="section level3">
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<div id="install-via-bioconductor" class="section level3">
 <h3 class="hasAnchor">
-<a href="#install-via-bioconductor-devel-only" class="anchor"></a>install via Bioconductor (devel only)</h3>
+<a href="#install-via-bioconductor" class="anchor" aria-hidden="true"></a>install via Bioconductor</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
-
-<span class="co"># The following initializes usage of Bioc devel</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span>version<span class="op">=</span><span class="st">'devel'</span><span class="op">)</span>
 
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"ramr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="install-the-latest-version-via-install_github" class="section level3">
 <h3 class="hasAnchor">
-<a href="#install-the-latest-version-via-install_github" class="anchor"></a>Install the latest version via install_github</h3>
+<a href="#install-the-latest-version-via-install_github" class="anchor" aria-hidden="true"></a>Install the latest version via install_github</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"BBCG/ramr"</span>, build_vignettes<span class="op">=</span><span class="cn">FALSE</span>,
@@ -118,25 +115,25 @@
 </div>
 <div id="citing-the-ramr-package" class="section level3">
 <h3 class="hasAnchor">
-<a href="#citing-the-ramr-package" class="anchor"></a>Citing the <em><code>ramr</code></em> package</h3>
+<a href="#citing-the-ramr-package" class="anchor" aria-hidden="true"></a>Citing the <em><code>ramr</code></em> package</h3>
 <p><a href="https://doi.org/10.1101/2020.12.01.403501" class="external-link">Nikolaienko et al., 2020 bioRxiv</a></p>
 </div>
 <div id="the-data-underlying-ramr-manuscript" class="section level3">
 <h3 class="hasAnchor">
-<a href="#the-data-underlying-ramr-manuscript" class="anchor"></a>The data underlying <em><code>ramr</code></em> manuscript</h3>
+<a href="#the-data-underlying-ramr-manuscript" class="anchor" aria-hidden="true"></a>The data underlying <em><code>ramr</code></em> manuscript</h3>
 <p><a href="https://doi.org/10.18710/ED8HSD" class="external-link">Replication Data for: “ramr: an R package for detection of rare aberrantly methylated regions”</a></p>
 </div>
 <div id="ramr-at-bioconductor" class="section level3">
 <h3 class="hasAnchor">
-<a href="#ramr-at-bioconductor" class="anchor"></a><em><code>ramr</code></em> at Bioconductor</h3>
-<p><a href="https://bioconductor.org/packages/devel/bioc/html/ramr.html" class="external-link">Bioconductor - ramr (development version)</a></p>
+<a href="#ramr-at-bioconductor" class="anchor" aria-hidden="true"></a><em><code>ramr</code></em> at Bioconductor</h3>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/ramr.html" class="external-link">Bioconductor - ramr (release)</a> <a href="https://bioconductor.org/packages/devel/bioc/html/ramr.html" class="external-link">Bioconductor - ramr (development version)</a></p>
 <hr>
 </div>
 </div>
 </div>
 <div id="how-to-use" class="section level1">
 <h1 class="hasAnchor">
-<a href="#how-to-use" class="anchor"></a>How to Use</h1>
+<a href="#how-to-use" class="anchor" aria-hidden="true"></a>How to Use</h1>
 <p>Please read package vignettes at <a href="https://bbcg.github.io/ramr/articles/ramr.html" class="external-link">GitHub pages</a> or within the R environment: <code><a href="articles/ramr.html">vignette("ramr", package="ramr")</a></code>, or consult the function’s help pages for the extensive information on usage, parameters and output values.</p>
 <p><em><code>ramr</code></em> methods operate on objects of the class <em><code>GRanges</code></em>. The input object for AMR search must in addition contain metadata columns with sample beta values. A typical input object looks like this:</p>
 <pre><code>GRanges object with 383788 ranges and 845 metadata columns:
@@ -178,7 +175,7 @@
 <p>The input object may be obtained using data from various sources. Here we provide two examples:</p>
 <div id="using-data-from-ncbi-geo" class="section level3">
 <h3 class="hasAnchor">
-<a href="#using-data-from-ncbi-geo" class="anchor"></a>Using data from NCBI GEO</h3>
+<a href="#using-data-from-ncbi-geo" class="anchor" aria-hidden="true"></a>Using data from NCBI GEO</h3>
 <p>The following code pulls (NB: very large) raw files from NCBI GEO database, performes normalization and creates <em><code>GRanges</code></em> object for further analysis using <em><code>ramr</code></em> (system requirements: 22GB of disk space, 64GB of RAM)</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">minfi</span><span class="op">)</span>
@@ -194,13 +191,13 @@
 <span class="co"># The default timeout for downloading files in R 4.1 is 60 seconds.</span>
 <span class="co"># If code above fails because of that, change your timeout using </span>
 <span class="co"># options(timeout=600)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/untar.html" class="external-link">untar</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">suppl.files</span><span class="op">)</span>, exdir<span class="op">=</span><span class="va">dest.dir</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/untar.html" class="external-link">untar</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">suppl.files</span><span class="op">)</span>, exdir<span class="op">=</span><span class="va">dest.dir</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">idat.files</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">dest.dir</span>, pattern<span class="op">=</span><span class="st">"idat.gz$"</span>, full.names<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">idat.files</span>, <span class="va">gunzip</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">idat.files</span>, <span class="va">gunzip</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># reading IDAT files</span>
 <span class="va">geo.idat</span> <span class="op">&lt;-</span> <span class="fu">read.metharray.exp</span><span class="op">(</span><span class="va">dest.dir</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">geo.idat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"(GSM\\d+).*"</span>, <span class="st">"\\1"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">geo.idat</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">geo.idat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"(GSM\\d+).*"</span>, <span class="st">"\\1"</span>, <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">geo.idat</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># processing raw data</span>
 <span class="va">genomic.ratio.set</span> <span class="op">&lt;-</span> <span class="fu">preprocessQuantile</span><span class="op">(</span><span class="va">geo.idat</span>, mergeManifest<span class="op">=</span><span class="cn">TRUE</span>, fixOutliers<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
@@ -208,14 +205,14 @@
 <span class="co"># creating the GRanges object with beta values</span>
 <span class="va">data.ranges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/genomic-range-squeezers.html" class="external-link">granges</a></span><span class="op">(</span><span class="va">genomic.ratio.set</span><span class="op">)</span>
 <span class="va">data.betas</span>  <span class="op">&lt;-</span> <span class="fu">getBeta</span><span class="op">(</span><span class="va">genomic.ratio.set</span><span class="op">)</span>
-<span class="va">sample.ids</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">geo.idat</span><span class="op">)</span>
-<span class="fu">mcols</span><span class="op">(</span><span class="va">data.ranges</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">data.betas</span>
+<span class="va">sample.ids</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">geo.idat</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">data.ranges</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">data.betas</span>
 
 <span class="co"># data.ranges and sample.ids objects are now ready for AMR search using ramr</span></code></pre></div>
 </div>
 <div id="using-bismark-cytosine-report-files" class="section level3">
 <h3 class="hasAnchor">
-<a href="#using-bismark-cytosine-report-files" class="anchor"></a>Using Bismark cytosine report files</h3>
+<a href="#using-bismark-cytosine-report-files" class="anchor" aria-hidden="true"></a>Using Bismark cytosine report files</h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">methylKit</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/GenomicRanges" class="external-link">GenomicRanges</a></span><span class="op">)</span>
@@ -235,8 +232,8 @@
 <span class="va">max.beta</span> <span class="op">&lt;-</span> <span class="fl">0.999</span>
 
 <span class="co"># reading and uniting methylation values</span>
-<span class="va">meth.data.raw</span> <span class="op">&lt;-</span> <span class="fu">methRead</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">file.list</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">sample.ids</span><span class="op">)</span>, assembly<span class="op">=</span><span class="st">"hg19"</span>, header<span class="op">=</span><span class="cn">TRUE</span>,
-                          context<span class="op">=</span><span class="va">context</span>, resolution<span class="op">=</span><span class="st">"base"</span>, treatment<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">sample.ids</span><span class="op">)</span><span class="op">)</span>,
+<span class="va">meth.data.raw</span> <span class="op">&lt;-</span> <span class="fu">methRead</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">file.list</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">sample.ids</span><span class="op">)</span>, assembly<span class="op">=</span><span class="st">"hg19"</span>, header<span class="op">=</span><span class="cn">TRUE</span>,
+                          context<span class="op">=</span><span class="va">context</span>, resolution<span class="op">=</span><span class="st">"base"</span>, treatment<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">sample.ids</span><span class="op">)</span><span class="op">)</span>,
                           pipeline<span class="op">=</span><span class="st">"bismarkCytosineReport"</span><span class="op">)</span>
 <span class="va">meth.data.utd</span> <span class="op">&lt;-</span> <span class="fu">unite</span><span class="op">(</span><span class="va">meth.data.raw</span>, destrand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Logic.html" class="external-link">isTRUE</a></span><span class="op">(</span><span class="va">context</span><span class="op">==</span><span class="st">"CpG"</span><span class="op">)</span><span class="op">)</span>
 
@@ -245,13 +242,13 @@
 <span class="va">data.betas</span>  <span class="op">&lt;-</span> <span class="fu">percMethylation</span><span class="op">(</span><span class="va">meth.data.utd</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span>
 <span class="va">data.betas</span><span class="op">[</span><span class="va">data.betas</span><span class="op">&lt;</span><span class="va">min.beta</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">min.beta</span>
 <span class="va">data.betas</span><span class="op">[</span><span class="va">data.betas</span><span class="op">&gt;</span><span class="va">max.beta</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">max.beta</span>
-<span class="fu">mcols</span><span class="op">(</span><span class="va">data.ranges</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">data.betas</span>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">data.ranges</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">data.betas</span>
 
 <span class="co"># data.ranges and sample.ids objects are now ready for AMR search using ramr</span></code></pre></div>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h2>
+<a href="#license" class="anchor" aria-hidden="true"></a>License</h2>
 <p>Artistic License/GPL</p>
 </div>
 </div>
@@ -291,7 +288,7 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/BBCG/ramr/actions" class="external-link"><img src="https://github.com/BBCG/ramr/workflows/R-CMD-check-bioc/badge.svg"></a></li>
 <li><a href="https://codecov.io/gh/BBCG/ramr" class="external-link"><img src="https://codecov.io/gh/BBCG/ramr/branch/master/graph/badge.svg"></a></li>
-<li><a href="https://bioconductor.org/packages/devel/bioc/html/ramr.html" class="external-link"><img src="https://bioconductor.org/shields/years-in-bioc/ramr.svg"></a></li>
+<li><a href="https://bioconductor.org/packages/release/bioc/html/ramr.html" class="external-link"><img src="https://bioconductor.org/shields/years-in-bioc/ramr.svg"></a></li>
 </ul>
 </div>
 

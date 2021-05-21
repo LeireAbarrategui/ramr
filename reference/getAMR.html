@@ -59,8 +59,6 @@ regions (AMRs) for all samples in a dataset." />
 
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -84,7 +82,7 @@ regions (AMRs) for all samples in a dataset." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -127,7 +125,7 @@ regions (AMRs) for all samples in a dataset." />
 regions (AMRs) for all samples in a dataset.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getAMR</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>getAMR</span><span class='op'>(</span>
   <span class='va'>data.ranges</span>,
   <span class='va'>data.samples</span>,
   ramr.method <span class='op'>=</span> <span class='st'>"IQR"</span>,
@@ -140,7 +138,7 @@ regions (AMRs) for all samples in a dataset.</p>
   exclude.range <span class='op'>=</span> <span class='cn'>NULL</span>,
   cores <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'>parallel</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/parallel/detectCores.html'>detectCores</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span>,
   <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -237,38 +235,39 @@ aberrations.</p>
 for info on enrichment analysis</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ramr</span><span class='op'>)</span>
-  <span class='fu'>getAMR</span><span class='op'>(</span><span class='va'>ramr.data</span>, <span class='va'>ramr.samples</span>, ramr.method<span class='op'>=</span><span class='st'>"beta"</span>,
-         min.cpgs<span class='op'>=</span><span class='fl'>5</span>, merge.window<span class='op'>=</span><span class='fl'>1000</span>, qval.cutoff<span class='op'>=</span><span class='fl'>1e-3</span>, cores<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; GRanges object with 22 ranges and 5 metadata columns:
-#&gt;        seqnames          ranges strand |             revmap      ncpg
-#&gt;           &lt;Rle&gt;       &lt;IRanges&gt;  &lt;Rle&gt; |             &lt;list&gt; &lt;integer&gt;
-#&gt;    [1]     chr1 2443577-2453006      * | 2722,2723,2724,...        30
-#&gt;    [2]     chr1 1589891-1590941      * | 1459,1460,1461,...        10
-#&gt;    [3]     chr1 1589891-1590941      * | 1459,1460,1461,...        10
-#&gt;    [4]     chr1 1589891-1590941      * | 1459,1460,1461,...        10
-#&gt;    [5]     chr1   874697-877876      * |    165,166,167,...        13
-#&gt;    ...      ...             ...    ... .                ...       ...
-#&gt;   [18]     chr1 1709203-1715039      * | 1595,1596,1597,...        20
-#&gt;   [19]     chr1 1709203-1715039      * | 1595,1596,1597,...        20
-#&gt;   [20]     chr1   566172-569687      * |       17,18,19,...        15
-#&gt;   [21]     chr1 1138931-1146903      * |    726,727,728,...        27
-#&gt;   [22]     chr1 1160713-1165393      * |    789,790,791,...        15
-#&gt;             sample     dbeta         pval
-#&gt;        &lt;character&gt; &lt;numeric&gt;    &lt;numeric&gt;
-#&gt;    [1]    sample25 -0.484617  1.26772e-19
-#&gt;    [2]    sample33  0.489562  1.27388e-07
-#&gt;    [3]    sample34  0.503785  5.93348e-08
-#&gt;    [4]    sample35  0.512633  3.30858e-08
-#&gt;    [5]    sample44  0.451475  1.30458e-07
-#&gt;    ...         ...       ...          ...
-#&gt;   [18]    sample79  0.455621  2.80743e-23
-#&gt;   [19]    sample80  0.453449  3.24593e-23
-#&gt;   [20]    sample95  0.498337 4.60616e-171
-#&gt;   [21]    sample98  0.380622 3.95738e-232
-#&gt;   [22]    sample98 -0.514668  4.27297e-18
-#&gt;   -------
-#&gt;   seqinfo: 24 sequences from hg19 genome; no seqlengths</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ramr</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>getAMR</span><span class='op'>(</span><span class='va'>ramr.data</span>, <span class='va'>ramr.samples</span>, ramr.method<span class='op'>=</span><span class='st'>"beta"</span>,</span>
+<span class='r-in'>         min.cpgs<span class='op'>=</span><span class='fl'>5</span>, merge.window<span class='op'>=</span><span class='fl'>1000</span>, qval.cutoff<span class='op'>=</span><span class='fl'>1e-3</span>, cores<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> GRanges object with 22 ranges and 5 metadata columns:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        seqnames          ranges strand |             revmap      ncpg</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           &lt;Rle&gt;       &lt;IRanges&gt;  &lt;Rle&gt; |             &lt;list&gt; &lt;integer&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [1]     chr1 2443577-2453006      * | 2722,2723,2724,...        30</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [2]     chr1 1589891-1590941      * | 1459,1460,1461,...        10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [3]     chr1 1589891-1590941      * | 1459,1460,1461,...        10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [4]     chr1 1589891-1590941      * | 1459,1460,1461,...        10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [5]     chr1   874697-877876      * |    165,166,167,...        13</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    ...      ...             ...    ... .                ...       ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [18]     chr1 1709203-1715039      * | 1595,1596,1597,...        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [19]     chr1 1709203-1715039      * | 1595,1596,1597,...        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [20]     chr1   566172-569687      * |       17,18,19,...        15</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [21]     chr1 1138931-1146903      * |    726,727,728,...        27</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [22]     chr1 1160713-1165393      * |    789,790,791,...        15</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             sample     dbeta         pval</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        &lt;character&gt; &lt;numeric&gt;    &lt;numeric&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [1]    sample25 -0.484617  1.26772e-19</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [2]    sample33  0.489562  1.27388e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [3]    sample34  0.503785  5.93348e-08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [4]    sample35  0.512633  3.30858e-08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [5]    sample44  0.451475  1.30458e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    ...         ...       ...          ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [18]    sample79  0.455621  2.80743e-23</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [19]    sample80  0.453449  3.24593e-23</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [20]    sample95  0.498337 4.60616e-171</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [21]    sample98  0.380622 3.95738e-232</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [22]    sample98 -0.514668  4.27297e-18</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   seqinfo: 24 sequences from hg19 genome; no seqlengths</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

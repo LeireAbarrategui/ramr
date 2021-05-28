@@ -138,12 +138,12 @@ corresponding beta values included as metadata.</p></td>
     <tr>
       <th>merge.window</th>
       <td><p>A positive integer. All `data.ranges` genomic locations
-within this distance will be merged.</p></td>
+within this distance will be merged (the default: 300).</p></td>
     </tr>
     <tr>
       <th>min.cpgs</th>
       <td><p>A single integer &gt;= 1. All genomic regions containing less
-than `min.cpgs` genomic locations are filtered out.</p></td>
+than `min.cpgs` genomic locations are filtered out (the default: 7).</p></td>
     </tr>
     <tr>
       <th>min.width</th>
@@ -155,7 +155,7 @@ width of at least `min.width` are returned.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The output is a `GRanges` object that contain all the genomic regions
-in `data.ranges` object.</p>
+in `data.ranges` object (in other words, all potential AMRs).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>In the provided dataset `getUniverse` merges and outputs all the genomic
@@ -164,7 +164,9 @@ be used as a reference set of genomic regions for AMR enrichment analysis.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='getAMR.html'>getAMR</a></code> for identification of AMRs,
-<code><a href='plotAMR.html'>plotAMR</a></code> for plotting AMRs</p></div>
+<code><a href='plotAMR.html'>plotAMR</a></code> for plotting AMRs, <code><a href='simulateAMR.html'>simulateAMR</a></code> and
+<code><a href='simulateData.html'>simulateData</a></code> for the generation of simulated test datasets,
+and `ramr` vignettes for the description of usage and sample data.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ramr</span><span class='op'>)</span></span>

@@ -127,7 +127,7 @@ regions (AMRs) for all samples in a dataset.</p>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>getAMR</span><span class='op'>(</span>
   <span class='va'>data.ranges</span>,
-  <span class='va'>data.samples</span>,
+  data.samples <span class='op'>=</span> <span class='cn'>NULL</span>,
   ramr.method <span class='op'>=</span> <span class='st'>"IQR"</span>,
   iqr.cutoff <span class='op'>=</span> <span class='fl'>5</span>,
   pval.cutoff <span class='op'>=</span> <span class='fl'>0.05</span>,
@@ -151,7 +151,8 @@ corresponding beta values included as metadata.</p></td>
     <tr>
       <th>data.samples</th>
       <td><p>A character vector with sample names (a subset of
-metadata column names).</p></td>
+metadata column names). If `NULL` (the default), then all samples (metadata
+columns) are included in the analysis.</p></td>
     </tr>
     <tr>
       <th>ramr.method</th>
@@ -169,13 +170,13 @@ and emphasizing outliers.</p></td>
       <th>iqr.cutoff</th>
       <td><p>A single integer &gt;= 1. Methylation beta values differing
 from the median value by more than `iqr.cutoff` interquartile ranges are
-considered to be significant.</p></td>
+considered to be significant (the default: 5).</p></td>
     </tr>
     <tr>
       <th>pval.cutoff</th>
-      <td><p>A numeric scalar. Bonferroni correction of `pval.cutoff`
-by the length of the `data.ranges` object is used to calculate `qval.cutoff`
-if the latter is `NULL`.</p></td>
+      <td><p>A numeric scalar (the default: 5e-2). Bonferroni
+correction of `pval.cutoff` by the length of the `data.ranges` object is
+used to calculate `qval.cutoff` if the latter is `NULL`.</p></td>
     </tr>
     <tr>
       <th>qval.cutoff</th>
@@ -188,12 +189,12 @@ it is calculated using `pval.cutoff`</p></td>
       <th>merge.window</th>
       <td><p>A positive integer. All significant (survived the
 filtering stage) `data.ranges` genomic locations within this distance will be
-merged to create AMRs.</p></td>
+merged to create AMRs (the default: 300).</p></td>
     </tr>
     <tr>
       <th>min.cpgs</th>
       <td><p>A single integer &gt;= 1. All AMRs containing less than
-`min.cpgs` significant genomic locations are filtered out.</p></td>
+`min.cpgs` significant genomic locations are filtered out (the default: 7).</p></td>
     </tr>
     <tr>
       <th>min.width</th>
@@ -202,14 +203,14 @@ width of at least `min.width` are returned.</p></td>
     </tr>
     <tr>
       <th>exclude.range</th>
-      <td><p>A numeric vector of length two. If not `NULL`, all
-`data.ranges` genomic locations with their median methylation beta value
-within the `exclude.range` interval are filtered out.</p></td>
+      <td><p>A numeric vector of length two. If not `NULL` (the
+default), all `data.ranges` genomic locations with their median methylation
+beta value within the `exclude.range` interval are filtered out.</p></td>
     </tr>
     <tr>
       <th>cores</th>
       <td><p>A single integer &gt;= 1. Number of processes for parallel
-computation.</p></td>
+computation (the default: all but one cores).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -220,10 +221,18 @@ computation.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The output is a `GRanges` object that contain all the aberrantly
+    <p>The output is a `GRanges` object that contains all the aberrantly
 methylated regions (AMRs) for all `data.samples` samples in `data.ranges`
-object. The `sample` metadata column contains an identifier of a sample to
-which corresponding AMR belongs to.</p>
+object. The following metadata columns may be present:</p><ul>
+<li><p>`sample` -- contains an identifier of a sample to which
+  corresponding AMR belongs</p></li>
+<li><p>`dbeta` -- average deviation of beta values for significant CpGs from
+  their corresponding median values</p></li>
+<li><p>`pval` -- geometric mean of p-values for significant CpGs</p></li>
+<li><p>`xiqr` -- average IQR-normalised deviation of beta values for
+  significant CpGs from their corresponding median values</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>In the provided dataset `getAMR` compares methylation beta values of each
@@ -232,7 +241,9 @@ aberrations.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='plotAMR.html'>plotAMR</a></code> for plotting AMRs, <code><a href='getUniverse.html'>getUniverse</a></code>
-for info on enrichment analysis</p></div>
+for info on enrichment analysis, <code><a href='simulateAMR.html'>simulateAMR</a></code> and
+<code><a href='simulateData.html'>simulateData</a></code> for the generation of simulated test datasets,
+and `ramr` vignettes for the description of usage and sample data.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ramr</span><span class='op'>)</span></span>

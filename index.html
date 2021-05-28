@@ -16,8 +16,9 @@
     methylation events in large datasets obtained by methylation profiling
     using array or high-throughput bisulfite sequencing. In addition, package
     provides functions to visualize found aberrantly methylated regions (AMRs),
-    and to generate sets of all possible regions to be used as reference sets
-    for enrichment analysis.">
+    to generate sets of all possible regions to be used as reference sets for
+    enrichment analysis, and to generate biologically relevant test datasets for
+    performance evaluation of AMR/DMR search algorithms.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -79,7 +80,7 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
-<p><em><code>ramr</code></em> is an R package for detection of low-frequency aberrant methylation events in large datasets obtained by methylation profiling using array or high-throughput bisulfite sequencing. In addition, package provides functions to visualize found aberrantly methylated regions (AMRs), and to generate sets of all possible regions to be used as reference sets for enrichment analysis.</p>
+<p><em><code>ramr</code></em> is an R package for detection of low-frequency aberrant methylation events in large datasets obtained by methylation profiling using array or high-throughput bisulfite sequencing. In addition, package provides functions to visualize found aberrantly methylated regions (AMRs), to generate sets of all possible regions to be used as reference sets for enrichment analysis, and to generate biologically relevant test datasets for performance evaluation of AMR/DMR search algorithms.</p>
 <p>This readme contains condensed info on <em><code>ramr</code></em> usage. For more, please check function-specific help pages and vignettes.</p>
 <div id="current-features" class="section level2">
 <h2 class="hasAnchor">
@@ -88,6 +89,7 @@
 <li>Identification of aberrantly methylated regions (AMRs)</li>
 <li>AMR visualization</li>
 <li>Generation of reference sets for third-party analyses (e.g. enrichment)</li>
+<li>Generation of test datasets for performance evaluation of algorithms for search of differentially (DMR) or aberrantly (AMR) methylated regions</li>
 </ul>
 <hr>
 </div>
@@ -172,12 +174,25 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://code.databio.org/LOLA" class="external-link">LOLA</a></span><span class="op">)</span>
 <span class="va">hg19.coredb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/LOLA/man/loadRegionDB.html" class="external-link">loadRegionDB</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"LOLACore"</span>, <span class="st">"hg19"</span>, package<span class="op">=</span><span class="st">"LOLA"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">core.hits</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/LOLA/man/runLOLA.html" class="external-link">runLOLA</a></span><span class="op">(</span><span class="va">amrs</span>, <span class="va">universe</span>, <span class="va">hg19.coredb</span>, cores<span class="op">=</span><span class="fl">1</span>, redefineUserSets<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>The input object may be obtained using data from various sources. Here we provide two examples:</p>
+<p>The following code generates random AMRs and methylation beta values using provided dataset as a template:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># unique random AMRs</span>
+<span class="va">amrs.unique</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/simulateAMR.html">simulateAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">10</span>, regions.per.sample<span class="op">=</span><span class="fl">2</span>,
+                           min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span>, dbeta<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>
+
+<span class="co"># methylation data with AMRs</span>
+<span class="va">data.with.amrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">10</span>,
+                               amr.ranges<span class="op">=</span><span class="va">amrs.unique</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  
+<span class="co"># that's how regions look like</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">data.with.amrs</span>, <span class="cn">NULL</span>, <span class="va">amrs.unique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>The input (or template) object may be obtained using data from various sources. Here we provide two examples:</p>
 <div id="using-data-from-ncbi-geo" class="section level3">
 <h3 class="hasAnchor">
 <a href="#using-data-from-ncbi-geo" class="anchor" aria-hidden="true"></a>Using data from NCBI GEO</h3>
 <p>The following code pulls (NB: very large) raw files from NCBI GEO database, performes normalization and creates <em><code>GRanges</code></em> object for further analysis using <em><code>ramr</code></em> (system requirements: 22GB of disk space, 64GB of RAM)</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">minfi</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">GEOquery</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/GenomicRanges" class="external-link">GenomicRanges</a></span><span class="op">)</span>
@@ -213,7 +228,7 @@
 <div id="using-bismark-cytosine-report-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#using-bismark-cytosine-report-files" class="anchor" aria-hidden="true"></a>Using Bismark cytosine report files</h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">methylKit</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/GenomicRanges" class="external-link">GenomicRanges</a></span><span class="op">)</span>
 

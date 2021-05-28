@@ -127,7 +127,7 @@ at particular genomic locations.</p>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>plotAMR</span><span class='op'>(</span>
   <span class='va'>data.ranges</span>,
-  <span class='va'>data.samples</span>,
+  data.samples <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>ramr.ranges</span>,
   highlight <span class='op'>=</span> <span class='cn'>NULL</span>,
   title <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -145,7 +145,8 @@ corresponding beta values included as metadata.</p></td>
     <tr>
       <th>data.samples</th>
       <td><p>A character vector with sample names (a subset of
-metadata column names) to be included in the plot.</p></td>
+metadata column names) to be included in the plot. If `NULL` (the default),
+then all samples (metadata columns) are included.</p></td>
     </tr>
     <tr>
       <th>ramr.ranges</th>
@@ -154,19 +155,19 @@ aberrantly methylated regions (AMRs).</p></td>
     </tr>
     <tr>
       <th>highlight</th>
-      <td><p>An optional list of samples to highlight. If NULL (default),
-will contain sample IDs from the `sample` metadata column of `ramr.ranges`
- object.</p></td>
+      <td><p>An optional list of samples to highlight. If NULL (the
+default), will contain sample IDs from the `sample` metadata column of
+`ramr.ranges` object.</p></td>
     </tr>
     <tr>
       <th>title</th>
-      <td><p>An optional title for the plot. If NULL (default), plot title is
-set to a genomic location of particular AMR.</p></td>
+      <td><p>An optional title for the plot. If NULL (the default), plot
+title is set to a genomic location of particular AMR.</p></td>
     </tr>
     <tr>
       <th>window</th>
       <td><p>An optional integer constant to expand genomic ranges of the
-`ramr.ranges` object.</p></td>
+`ramr.ranges` object (the default: 300).</p></td>
     </tr>
     </table>
 
@@ -183,7 +184,10 @@ significantly different methylation profiles ('sample' column of
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='getAMR.html'>getAMR</a></code> for identification of AMRs,
-<code><a href='getUniverse.html'>getUniverse</a></code> or README for info on enrichment analysis</p></div>
+<code><a href='getUniverse.html'>getUniverse</a></code> for info on enrichment analysis,
+<code><a href='simulateAMR.html'>simulateAMR</a></code> and <code><a href='simulateData.html'>simulateData</a></code> for the generation
+of simulated test datasets, and `ramr` vignettes for the description of
+usage and sample data.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ramr</span><span class='op'>)</span></span>

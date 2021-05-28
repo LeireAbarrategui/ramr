@@ -30,4 +30,10 @@
   <url>
     <loc>/reference/ramr.data.html</loc>
   </url>
+  <url>
+    <loc>/reference/simulateAMR.html</loc>
+  </url>
+  <url>
+    <loc>/reference/simulateData.html</loc>
+  </url>
 </urlset>

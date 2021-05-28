@@ -69,7 +69,7 @@
       <h1 data-toc-skip>The ramr User’s Guide</h1>
                         <h4 data-toc-skip class="author">Oleksii Nikolaienko</h4>
             
-            <h4 data-toc-skip class="date">21 May, 2021</h4>
+            <h4 data-toc-skip class="date">28 May, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/BBCG/ramr/blob/master/vignettes/ramr.Rmd" class="external-link"><code>vignettes/ramr.Rmd</code></a></small>
       <div class="hidden name"><code>ramr.Rmd</code></div>
@@ -85,7 +85,7 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
-<p><em><code>ramr</code></em> is an R package for detection of low-frequency aberrant methylation events in large datasets obtained by methylation profiling using array or high-throughput bisulfite sequencing. In addition, package provides functions to visualize found aberrantly methylated regions (AMRs), and to generate sets of all possible regions to be used as reference sets for enrichment analysis.</p>
+<p><em><code>ramr</code></em> is an R package for detection of low-frequency aberrant methylation events in large datasets obtained by methylation profiling using array or high-throughput bisulfite sequencing. In addition, package provides functions to visualize found aberrantly methylated regions (AMRs), to generate sets of all possible regions to be used as reference sets for enrichment analysis, and to generate biologically relevant test datasets for performance evaluation of AMR/DMR search algorithms.</p>
 <div id="current-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#current-features" class="anchor" aria-hidden="true"></a>Current Features</h2>
@@ -93,6 +93,7 @@
 <li>Identification of aberrantly methylated regions (AMRs)</li>
 <li>AMR visualization</li>
 <li>Generation of reference sets for third-party analyses (e.g. enrichment)</li>
+<li>Generation of test datasets for performance evaluation of algorithms for search of differentially (DMR) or aberrantly (AMR) methylated regions</li>
 </ul>
 </div>
 </div>
@@ -177,7 +178,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, <span class="va">ramr.samples</span>, <span class="va">ramr.tp.nonunique</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">6</span>,<span class="fl">11</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="ramr_files/figure-html/unnamed-chunk-2-2.png" width="100%" height="100%"></p>
-<p>The input object may be obtained using data from various sources. Here we provide two examples:</p>
+<p>The input (or template) object may be obtained using data from various sources. Here we provide two examples:</p>
 <div id="using-data-from-ncbi-geo" class="section level3">
 <h3 class="hasAnchor">
 <a href="#using-data-from-ncbi-geo" class="anchor" aria-hidden="true"></a>Using data from NCBI GEO</h3>
@@ -247,11 +248,89 @@ mcols(data.ranges) &lt;- data.betas
 # data.ranges and sample.ids objects are now ready for AMR search using ramr</a></code></pre>
 </div>
 </div>
+<div id="simulating-data" class="section level1">
+<h1 class="hasAnchor">
+<a href="#simulating-data" class="anchor" aria-hidden="true"></a>Simulating data</h1>
+<p><em><code>ramr</code></em> provides methods to create sets of random AMRs and to generate biologically relevant methylation beta values using real datasets as templates. The following code provides an example, however it is recommended to use a real experimental data (e.g. GSE51032) to create a test dataset for assessment performance of <em><code>ramr</code></em> or other AMR/DMR search engines.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># set the seed if reproducible results required</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">999</span><span class="op">)</span>
+
+<span class="co"># unique random AMRs</span>
+  <span class="va">amrs.unique</span> <span class="op">&lt;-</span>
+    <span class="fu"><a href="../reference/simulateAMR.html">simulateAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>, regions.per.sample<span class="op">=</span><span class="fl">2</span>,
+                min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span>, dbeta<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>
+
+<span class="co"># non-unique AMRs outside of regions with unique AMRs</span>
+  <span class="va">amrs.nonunique</span> <span class="op">&lt;-</span>
+    <span class="fu"><a href="../reference/simulateAMR.html">simulateAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">3</span>, exclude.ranges<span class="op">=</span><span class="va">amrs.unique</span>,
+                samples.per.region<span class="op">=</span><span class="fl">2</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span><span class="op">)</span>
+  
+<span class="co"># random noise outside of AMR regions</span>
+  <span class="va">noise</span> <span class="op">&lt;-</span>
+    <span class="fu"><a href="../reference/simulateAMR.html">simulateAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>, regions.per.sample<span class="op">=</span><span class="fl">20</span>,
+                exclude.ranges<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span>,
+                min.cpgs<span class="op">=</span><span class="fl">1</span>, max.cpgs<span class="op">=</span><span class="fl">1</span>, merge.window<span class="op">=</span><span class="fl">1</span>, dbeta<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>
+
+<span class="co"># "smooth" methylation data without AMRs (negative control)</span>
+  <span class="va">smooth.data</span> <span class="op">&lt;-</span>
+    <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  
+<span class="co"># methylation data with AMRs and noise</span>
+  <span class="va">noisy.data</span> <span class="op">&lt;-</span>
+    <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>,
+                 amr.ranges<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span>, <span class="va">noise</span><span class="op">)</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  
+<span class="co"># that's how regions look like</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'gridExtra'</span>
+<span class="co">#&gt; The following object is masked from 'package:BiocGenerics':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     combine</span>
+
+  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="va">amrs.unique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="ramr_files/figure-html/unnamed-chunk-3-1.png" width="100%" height="100%"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="va">amrs.nonunique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="ramr_files/figure-html/unnamed-chunk-3-2.png" width="100%" height="100%"></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="va">noise</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; geom_path: Each group consists of only one observation. Do you need to adjust the group</span>
+<span class="co">#&gt; aesthetic?</span></code></pre></div>
+<p><img src="ramr_files/figure-html/unnamed-chunk-3-3.png" width="100%" height="100%"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  
+<span class="co"># can we find them?</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">found</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
+                              merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-2</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;   7.635   0.952   4.926</span>
+  
+<span class="co"># all possible regions</span>
+  <span class="va">all.ranges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getUniverse.html">getUniverse</a></span><span class="op">(</span><span class="va">noisy.data</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span><span class="op">)</span>
+  
+<span class="co"># true positives</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">found</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%over%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 55</span>
+  
+<span class="co"># false positives</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">found</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0</span>
+
+<span class="co"># true negatives</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">all.ranges</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 206</span>
+  
+<span class="co"># false negatives</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="va">found</span><span class="op">)</span>
+<span class="co">#&gt; [1] 2</span></code></pre></div>
+</div>
 <div id="amr-identification" class="section level1">
 <h1 class="hasAnchor">
 <a href="#amr-identification" class="anchor" aria-hidden="true"></a>AMR identification</h1>
 <p>This code shows how to do basic analysis with <em><code>ramr</code></em> using provided data files:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># identify AMRs</span>
 <span class="va">amrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, <span class="va">ramr.samples</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-3</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
@@ -288,20 +367,14 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co">#&gt;   -------</span>
 <span class="co">#&gt;   seqinfo: 24 sequences from hg19 genome; no seqlengths</span>
 
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'gridExtra'</span>
-<span class="co">#&gt; The following object is masked from 'package:BiocGenerics':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     combine</span>
 <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, <span class="va">ramr.samples</span>, <span class="va">amrs</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="ramr_files/figure-html/unnamed-chunk-3-1.png" width="100%" height="100%"></p>
+<p><img src="ramr_files/figure-html/unnamed-chunk-4-1.png" width="100%" height="100%"></p>
 </div>
 <div id="amr-annotation-and-enrichment-analysis" class="section level1">
 <h1 class="hasAnchor">
 <a href="#amr-annotation-and-enrichment-analysis" class="anchor" aria-hidden="true"></a>AMR annotation and enrichment analysis</h1>
 <p>If necessary, AMRs can be annotated to known genomic elements using R library <em><code>annotatr</code></em> <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> or tested for potential enrichment in epigenetic or other marks using R library <em><code>LOLA</code></em> <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># annotating AMRs using R library annotatr</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">annotatr</span><span class="op">)</span>
 <span class="co">#&gt; Warning: replacing previous import 'AnnotationHub::hubUrl' by 'rtracklayer::hubUrl' when loading</span>
@@ -332,7 +405,7 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co">#&gt; Building exons...</span>
 <span class="co">#&gt; Building first exons...</span>
 <span class="co">#&gt; Building introns...</span>
-<span class="co">#&gt; snapshotDate(): 2021-05-18</span>
+<span class="co">#&gt; snapshotDate(): 2021-05-26</span>
 <span class="co">#&gt; Building CpG islands...</span>
 <span class="co">#&gt; loading from cache</span>
 <span class="co">#&gt; Building CpG shores...</span>
@@ -384,9 +457,9 @@ runLOLA(amrs, universe, hg19.coredb, cores=1, redefineUserSets=TRUE)</code></pre
 <div id="session-info" class="section level2">
 <h2 class="hasAnchor">
 <a href="#session-info" class="anchor" aria-hidden="true"></a>Session Info</h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; R Under development (unstable) (2021-04-15 r80175)</span>
+<span class="co">#&gt; R version 4.1.0 (2021-05-18)</span>
 <span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span>
 <span class="co">#&gt; Running under: Ubuntu 20.04.2 LTS</span>
 <span class="co">#&gt; </span>
@@ -404,22 +477,22 @@ runLOLA(amrs, universe, hg19.coredb, cores=1, redefineUserSets=TRUE)</code></pre
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
 <span class="co">#&gt;  [1] org.Hs.eg.db_3.13.0                     TxDb.Hsapiens.UCSC.hg19.knownGene_3.2.2</span>
-<span class="co">#&gt;  [3] GenomicFeatures_1.44.0                  AnnotationDbi_1.54.0                   </span>
-<span class="co">#&gt;  [5] Biobase_2.52.0                          annotatr_1.18.0                        </span>
+<span class="co">#&gt;  [3] GenomicFeatures_1.45.0                  AnnotationDbi_1.55.0                   </span>
+<span class="co">#&gt;  [5] Biobase_2.53.0                          annotatr_1.19.0                        </span>
 <span class="co">#&gt;  [7] gridExtra_2.3                           ramr_1.1.0                             </span>
 <span class="co">#&gt;  [9] matrixStats_0.58.0                      doParallel_1.0.16                      </span>
 <span class="co">#&gt; [11] iterators_1.0.13                        foreach_1.5.1                          </span>
-<span class="co">#&gt; [13] GenomicRanges_1.44.0                    GenomeInfoDb_1.28.0                    </span>
-<span class="co">#&gt; [15] IRanges_2.26.0                          S4Vectors_0.30.0                       </span>
-<span class="co">#&gt; [17] BiocGenerics_0.38.0                    </span>
+<span class="co">#&gt; [13] GenomicRanges_1.45.0                    GenomeInfoDb_1.29.0                    </span>
+<span class="co">#&gt; [15] IRanges_2.27.0                          S4Vectors_0.31.0                       </span>
+<span class="co">#&gt; [17] BiocGenerics_0.39.0                    </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
 <span class="co">#&gt;   [1] colorspace_2.0-1              rjson_0.2.20                  ellipsis_0.3.2               </span>
-<span class="co">#&gt;   [4] EnvStats_2.4.0                rprojroot_2.0.2               XVector_0.32.0               </span>
+<span class="co">#&gt;   [4] EnvStats_2.4.0                rprojroot_2.0.2               XVector_0.33.0               </span>
 <span class="co">#&gt;   [7] fs_1.5.0                      rstudioapi_0.13               farver_2.1.0                 </span>
-<span class="co">#&gt;  [10] bit64_4.0.5                   interactiveDisplayBase_1.30.0 fansi_0.4.2                  </span>
+<span class="co">#&gt;  [10] bit64_4.0.5                   interactiveDisplayBase_1.31.0 fansi_0.5.0                  </span>
 <span class="co">#&gt;  [13] codetools_0.2-18              cachem_1.0.5                  knitr_1.33                   </span>
-<span class="co">#&gt;  [16] jsonlite_1.7.2                Rsamtools_2.8.0               dbplyr_2.1.1                 </span>
+<span class="co">#&gt;  [16] jsonlite_1.7.2                Rsamtools_2.9.0               dbplyr_2.1.1                 </span>
 <span class="co">#&gt;  [19] png_0.1-7                     shiny_1.6.0                   readr_1.4.0                  </span>
 <span class="co">#&gt;  [22] BiocManager_1.30.15           compiler_4.1.0                httr_1.4.2                   </span>
 <span class="co">#&gt;  [25] assertthat_0.2.1              Matrix_1.3-3                  fastmap_1.1.0                </span>
@@ -428,28 +501,28 @@ runLOLA(amrs, universe, hg19.coredb, cores=1, redefineUserSets=TRUE)</code></pre
 <span class="co">#&gt;  [34] glue_1.4.2                    GenomeInfoDbData_1.2.6        reshape2_1.4.4               </span>
 <span class="co">#&gt;  [37] dplyr_1.0.6                   rappdirs_0.3.3                Rcpp_1.0.6                   </span>
 <span class="co">#&gt;  [40] jquerylib_0.1.4               pkgdown_1.6.1.9001            vctrs_0.3.8                  </span>
-<span class="co">#&gt;  [43] Biostrings_2.60.0             rtracklayer_1.52.0            xfun_0.23                    </span>
+<span class="co">#&gt;  [43] Biostrings_2.61.0             rtracklayer_1.53.0            xfun_0.23                    </span>
 <span class="co">#&gt;  [46] stringr_1.4.0                 ps_1.6.0                      mime_0.10                    </span>
 <span class="co">#&gt;  [49] lifecycle_1.0.0               restfulr_0.0.13               XML_3.99-0.6                 </span>
-<span class="co">#&gt;  [52] AnnotationHub_3.0.0           zlibbioc_1.38.0               scales_1.1.1                 </span>
-<span class="co">#&gt;  [55] BSgenome_1.60.0               ragg_1.1.2                    hms_1.1.0                    </span>
-<span class="co">#&gt;  [58] promises_1.2.0.1              MatrixGenerics_1.4.0          SummarizedExperiment_1.22.0  </span>
+<span class="co">#&gt;  [52] AnnotationHub_3.1.0           zlibbioc_1.39.0               scales_1.1.1                 </span>
+<span class="co">#&gt;  [55] BSgenome_1.61.0               ragg_1.1.2                    hms_1.1.0                    </span>
+<span class="co">#&gt;  [58] promises_1.2.0.1              MatrixGenerics_1.5.0          SummarizedExperiment_1.23.0  </span>
 <span class="co">#&gt;  [61] yaml_2.2.1                    curl_4.3.1                    memoise_2.0.0                </span>
-<span class="co">#&gt;  [64] ggplot2_3.3.3                 sass_0.4.0                    biomaRt_2.48.0               </span>
-<span class="co">#&gt;  [67] stringi_1.6.2                 RSQLite_2.2.7                 BiocVersion_3.13.1           </span>
-<span class="co">#&gt;  [70] highr_0.9                     BiocIO_1.2.0                  desc_1.3.0                   </span>
-<span class="co">#&gt;  [73] filelock_1.0.2                optimx_2020-4.2               BiocParallel_1.26.0          </span>
+<span class="co">#&gt;  [64] ggplot2_3.3.3                 sass_0.4.0                    biomaRt_2.49.0               </span>
+<span class="co">#&gt;  [67] stringi_1.6.2                 RSQLite_2.2.7                 BiocVersion_3.14.0           </span>
+<span class="co">#&gt;  [70] highr_0.9                     BiocIO_1.3.0                  desc_1.3.0                   </span>
+<span class="co">#&gt;  [73] filelock_1.0.2                optimx_2020-4.2               BiocParallel_1.27.0          </span>
 <span class="co">#&gt;  [76] rlang_0.4.11                  pkgconfig_2.0.3               systemfonts_1.0.2            </span>
 <span class="co">#&gt;  [79] bitops_1.0-7                  lattice_0.20-44               evaluate_0.14                </span>
-<span class="co">#&gt;  [82] purrr_0.3.4                   GenomicAlignments_1.28.0      labeling_0.4.2               </span>
+<span class="co">#&gt;  [82] purrr_0.3.4                   GenomicAlignments_1.29.0      labeling_0.4.2               </span>
 <span class="co">#&gt;  [85] bit_4.0.4                     tidyselect_1.1.1              plyr_1.8.6                   </span>
 <span class="co">#&gt;  [88] magrittr_2.0.1                R6_2.5.0                      generics_0.1.0               </span>
-<span class="co">#&gt;  [91] DelayedArray_0.18.0           DBI_1.1.1                     withr_2.4.2                  </span>
-<span class="co">#&gt;  [94] pillar_1.6.1                  KEGGREST_1.32.0               RCurl_1.98-1.3               </span>
+<span class="co">#&gt;  [91] DelayedArray_0.19.0           DBI_1.1.1                     withr_2.4.2                  </span>
+<span class="co">#&gt;  [94] pillar_1.6.1                  KEGGREST_1.33.0               RCurl_1.98-1.3               </span>
 <span class="co">#&gt;  [97] tibble_3.1.2                  crayon_1.4.1                  utf8_1.2.1                   </span>
-<span class="co">#&gt; [100] BiocFileCache_2.0.0           rmarkdown_2.8                 progress_1.2.2               </span>
+<span class="co">#&gt; [100] BiocFileCache_2.1.0           rmarkdown_2.8                 progress_1.2.2               </span>
 <span class="co">#&gt; [103] ExtDist_0.6-4                 grid_4.1.0                    blob_1.2.1                   </span>
-<span class="co">#&gt; [106] digest_0.6.27                 xtable_1.8-4                  regioneR_1.24.0              </span>
+<span class="co">#&gt; [106] digest_0.6.27                 xtable_1.8-4                  regioneR_1.25.0              </span>
 <span class="co">#&gt; [109] httpuv_1.6.1                  numDeriv_2016.8-1.1           textshaping_0.3.4            </span>
 <span class="co">#&gt; [112] munsell_0.5.0                 bslib_0.2.5.1</span></code></pre></div>
 </div>

@@ -79,7 +79,7 @@
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      <p>A comprehensive guide to using the ramr package for detection of rare aberrantly methylated regions</p>
+      <p>A comprehensive guide to using the ramr package for detection of rare aberrantly methylated regions.</p>
     </div>
     
 <div id="introduction" class="section level1">
@@ -150,7 +150,8 @@
 <span class="co">#&gt; Loading required package: doParallel</span>
 <span class="co">#&gt; Loading required package: foreach</span>
 <span class="co">#&gt; Loading required package: iterators</span>
-<span class="co">#&gt; Loading required package: matrixStats</span>
+<span class="co">#&gt; Loading required package: doRNG</span>
+<span class="co">#&gt; Loading required package: rngtools</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">ramr</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ramr.samples</span><span class="op">)</span>
@@ -251,7 +252,7 @@ mcols(data.ranges) &lt;- data.betas
 <div id="simulating-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simulating-data" class="anchor" aria-hidden="true"></a>Simulating data</h1>
-<p><em><code>ramr</code></em> provides methods to create sets of random AMRs and to generate biologically relevant methylation beta values using real datasets as templates. The following code provides an example, however it is recommended to use a real experimental data (e.g. GSE51032) to create a test dataset for assessment performance of <em><code>ramr</code></em> or other AMR/DMR search engines.</p>
+<p><em><code>ramr</code></em> provides methods to create sets of random AMRs and to generate biologically relevant methylation beta values using real datasets as templates. The following code provides an example, however it is recommended to use a real experimental data (e.g. GSE51032) to create a test dataset for assessing the performance of <em><code>ramr</code></em> or other AMR/DMR search engines. The results of parallel data generation are fully reproducible when the same seed has been set (thanks to doRNG::%dorng%).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># set the seed if reproducible results required</span>
   <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">999</span><span class="op">)</span>
@@ -292,7 +293,7 @@ mcols(data.ranges) &lt;- data.betas
   <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="va">amrs.unique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ramr_files/figure-html/unnamed-chunk-3-1.png" width="100%" height="100%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="va">amrs.nonunique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ramr_files/figure-html/unnamed-chunk-3-2.png" width="100%" height="100%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="va">noise</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
@@ -305,14 +306,14 @@ mcols(data.ranges) &lt;- data.betas
   <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">found</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                               merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-2</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   7.635   0.952   4.926</span>
+<span class="co">#&gt;   7.154   0.820   4.542</span>
   
 <span class="co"># all possible regions</span>
   <span class="va">all.ranges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getUniverse.html">getUniverse</a></span><span class="op">(</span><span class="va">noisy.data</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span><span class="op">)</span>
   
 <span class="co"># true positives</span>
   <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">found</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%over%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 55</span>
+<span class="co">#&gt; [1] 56</span>
   
 <span class="co"># false positives</span>
   <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">found</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
@@ -324,7 +325,7 @@ mcols(data.ranges) &lt;- data.betas
   
 <span class="co"># false negatives</span>
   <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="va">found</span><span class="op">)</span>
-<span class="co">#&gt; [1] 2</span></code></pre></div>
+<span class="co">#&gt; [1] 1</span></code></pre></div>
 </div>
 <div id="amr-identification" class="section level1">
 <h1 class="hasAnchor">
@@ -369,6 +370,7 @@ mcols(data.ranges) &lt;- data.betas
 
 <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, <span class="va">ramr.samples</span>, <span class="va">amrs</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ramr_files/figure-html/unnamed-chunk-4-1.png" width="100%" height="100%"></p>
+<p>Again, the results of parallel processing are fully reproducible if the same seed has been set.</p>
 </div>
 <div id="amr-annotation-and-enrichment-analysis" class="section level1">
 <h1 class="hasAnchor">
@@ -390,11 +392,6 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Vignettes contain introductory material; view with 'browseVignettes()'. To cite</span>
 <span class="co">#&gt;     Bioconductor, see 'citation("Biobase")', and for packages 'citation("pkgname")'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'Biobase'</span>
-<span class="co">#&gt; The following objects are masked from 'package:matrixStats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     anyMissing, rowMedians</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 'select()' returned 1:1 mapping between keys and columns</span>
 <span class="co">#&gt; Building promoters...</span>
@@ -480,11 +477,11 @@ runLOLA(amrs, universe, hg19.coredb, cores=1, redefineUserSets=TRUE)</code></pre
 <span class="co">#&gt;  [3] GenomicFeatures_1.45.0                  AnnotationDbi_1.55.0                   </span>
 <span class="co">#&gt;  [5] Biobase_2.53.0                          annotatr_1.19.0                        </span>
 <span class="co">#&gt;  [7] gridExtra_2.3                           ramr_1.1.0                             </span>
-<span class="co">#&gt;  [9] matrixStats_0.58.0                      doParallel_1.0.16                      </span>
-<span class="co">#&gt; [11] iterators_1.0.13                        foreach_1.5.1                          </span>
-<span class="co">#&gt; [13] GenomicRanges_1.45.0                    GenomeInfoDb_1.29.0                    </span>
-<span class="co">#&gt; [15] IRanges_2.27.0                          S4Vectors_0.31.0                       </span>
-<span class="co">#&gt; [17] BiocGenerics_0.39.0                    </span>
+<span class="co">#&gt;  [9] doRNG_1.8.2                             rngtools_1.5                           </span>
+<span class="co">#&gt; [11] doParallel_1.0.16                       iterators_1.0.13                       </span>
+<span class="co">#&gt; [13] foreach_1.5.1                           GenomicRanges_1.45.0                   </span>
+<span class="co">#&gt; [15] GenomeInfoDb_1.29.0                     IRanges_2.27.0                         </span>
+<span class="co">#&gt; [17] S4Vectors_0.31.0                        BiocGenerics_0.39.0                    </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
 <span class="co">#&gt;   [1] colorspace_2.0-1              rjson_0.2.20                  ellipsis_0.3.2               </span>
@@ -495,7 +492,7 @@ runLOLA(amrs, universe, hg19.coredb, cores=1, redefineUserSets=TRUE)</code></pre
 <span class="co">#&gt;  [16] jsonlite_1.7.2                Rsamtools_2.9.0               dbplyr_2.1.1                 </span>
 <span class="co">#&gt;  [19] png_0.1-7                     shiny_1.6.0                   readr_1.4.0                  </span>
 <span class="co">#&gt;  [22] BiocManager_1.30.15           compiler_4.1.0                httr_1.4.2                   </span>
-<span class="co">#&gt;  [25] assertthat_0.2.1              Matrix_1.3-3                  fastmap_1.1.0                </span>
+<span class="co">#&gt;  [25] Matrix_1.3-3                  assertthat_0.2.1              fastmap_1.1.0                </span>
 <span class="co">#&gt;  [28] cli_2.5.0                     later_1.2.0                   htmltools_0.5.1.1            </span>
 <span class="co">#&gt;  [31] prettyunits_1.1.1             tools_4.1.0                   gtable_0.3.0                 </span>
 <span class="co">#&gt;  [34] glue_1.4.2                    GenomeInfoDbData_1.2.6        reshape2_1.4.4               </span>
@@ -505,26 +502,26 @@ runLOLA(amrs, universe, hg19.coredb, cores=1, redefineUserSets=TRUE)</code></pre
 <span class="co">#&gt;  [46] stringr_1.4.0                 ps_1.6.0                      mime_0.10                    </span>
 <span class="co">#&gt;  [49] lifecycle_1.0.0               restfulr_0.0.13               XML_3.99-0.6                 </span>
 <span class="co">#&gt;  [52] AnnotationHub_3.1.0           zlibbioc_1.39.0               scales_1.1.1                 </span>
-<span class="co">#&gt;  [55] BSgenome_1.61.0               ragg_1.1.2                    hms_1.1.0                    </span>
-<span class="co">#&gt;  [58] promises_1.2.0.1              MatrixGenerics_1.5.0          SummarizedExperiment_1.23.0  </span>
+<span class="co">#&gt;  [55] BSgenome_1.61.0               MatrixGenerics_1.5.0          ragg_1.1.2                   </span>
+<span class="co">#&gt;  [58] hms_1.1.0                     promises_1.2.0.1              SummarizedExperiment_1.23.0  </span>
 <span class="co">#&gt;  [61] yaml_2.2.1                    curl_4.3.1                    memoise_2.0.0                </span>
 <span class="co">#&gt;  [64] ggplot2_3.3.3                 sass_0.4.0                    biomaRt_2.49.0               </span>
 <span class="co">#&gt;  [67] stringi_1.6.2                 RSQLite_2.2.7                 BiocVersion_3.14.0           </span>
 <span class="co">#&gt;  [70] highr_0.9                     BiocIO_1.3.0                  desc_1.3.0                   </span>
 <span class="co">#&gt;  [73] filelock_1.0.2                optimx_2020-4.2               BiocParallel_1.27.0          </span>
 <span class="co">#&gt;  [76] rlang_0.4.11                  pkgconfig_2.0.3               systemfonts_1.0.2            </span>
-<span class="co">#&gt;  [79] bitops_1.0-7                  lattice_0.20-44               evaluate_0.14                </span>
-<span class="co">#&gt;  [82] purrr_0.3.4                   GenomicAlignments_1.29.0      labeling_0.4.2               </span>
-<span class="co">#&gt;  [85] bit_4.0.4                     tidyselect_1.1.1              plyr_1.8.6                   </span>
-<span class="co">#&gt;  [88] magrittr_2.0.1                R6_2.5.0                      generics_0.1.0               </span>
-<span class="co">#&gt;  [91] DelayedArray_0.19.0           DBI_1.1.1                     withr_2.4.2                  </span>
-<span class="co">#&gt;  [94] pillar_1.6.1                  KEGGREST_1.33.0               RCurl_1.98-1.3               </span>
-<span class="co">#&gt;  [97] tibble_3.1.2                  crayon_1.4.1                  utf8_1.2.1                   </span>
-<span class="co">#&gt; [100] BiocFileCache_2.1.0           rmarkdown_2.8                 progress_1.2.2               </span>
-<span class="co">#&gt; [103] ExtDist_0.6-4                 grid_4.1.0                    blob_1.2.1                   </span>
-<span class="co">#&gt; [106] digest_0.6.27                 xtable_1.8-4                  regioneR_1.25.0              </span>
-<span class="co">#&gt; [109] httpuv_1.6.1                  numDeriv_2016.8-1.1           textshaping_0.3.4            </span>
-<span class="co">#&gt; [112] munsell_0.5.0                 bslib_0.2.5.1</span></code></pre></div>
+<span class="co">#&gt;  [79] matrixStats_0.58.0            bitops_1.0-7                  lattice_0.20-44              </span>
+<span class="co">#&gt;  [82] evaluate_0.14                 purrr_0.3.4                   GenomicAlignments_1.29.0     </span>
+<span class="co">#&gt;  [85] labeling_0.4.2                bit_4.0.4                     tidyselect_1.1.1             </span>
+<span class="co">#&gt;  [88] plyr_1.8.6                    magrittr_2.0.1                R6_2.5.0                     </span>
+<span class="co">#&gt;  [91] generics_0.1.0                DelayedArray_0.19.0           DBI_1.1.1                    </span>
+<span class="co">#&gt;  [94] withr_2.4.2                   pillar_1.6.1                  KEGGREST_1.33.0              </span>
+<span class="co">#&gt;  [97] RCurl_1.98-1.3                tibble_3.1.2                  crayon_1.4.1                 </span>
+<span class="co">#&gt; [100] utf8_1.2.1                    BiocFileCache_2.1.0           rmarkdown_2.8                </span>
+<span class="co">#&gt; [103] progress_1.2.2                ExtDist_0.6-4                 grid_4.1.0                   </span>
+<span class="co">#&gt; [106] blob_1.2.1                    digest_0.6.27                 xtable_1.8-4                 </span>
+<span class="co">#&gt; [109] regioneR_1.25.0               httpuv_1.6.1                  numDeriv_2016.8-1.1          </span>
+<span class="co">#&gt; [112] textshaping_0.3.4             munsell_0.5.0                 bslib_0.2.5.1</span></code></pre></div>
 </div>
 </div>
 <div id="references" class="section level1">

@@ -140,7 +140,8 @@ methylated regions.</p>
   sample.names <span class='op'>=</span> <span class='cn'>NULL</span>,
   min.beta <span class='op'>=</span> <span class='fl'>0.001</span>,
   max.beta <span class='op'>=</span> <span class='fl'>0.999</span>,
-  cores <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'>parallel</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/parallel/detectCores.html'>detectCores</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span>
+  cores <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'>parallel</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/parallel/detectCores.html'>detectCores</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -198,6 +199,10 @@ The default: 0.999.</p></td>
 computation (the default: all but one cores). Results of parallel processing
 are fully reproducible when the same seed is used (thanks to doRNG).</p></td>
     </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>boolean to report progress and timings (default: TRUE).</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -244,6 +249,10 @@ usage and sample data.</p></div>
 <span class='r-in'>                exclude.ranges<span class='op'>=</span><span class='va'>amrs</span>, min.cpgs<span class='op'>=</span><span class='fl'>1</span>, max.cpgs<span class='op'>=</span><span class='fl'>1</span>, merge.window<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span></span>
 <span class='r-in'>  <span class='va'>noisy.data</span> <span class='op'>&lt;-</span></span>
 <span class='r-in'>    <span class='fu'>simulateData</span><span class='op'>(</span><span class='va'>ramr.data</span>, nsamples<span class='op'>=</span><span class='fl'>10</span>, amr.ranges<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='va'>amrs</span>,<span class='va'>noise</span><span class='op'>)</span>, cores<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Simulating data</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [1.120s]</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Introducing epimutations</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [1.049s]</span>
 <span class='r-in'>  <span class='fu'><a href='plotAMR.html'>plotAMR</a></span><span class='op'>(</span><span class='va'>noisy.data</span>, <span class='cn'>NULL</span>, <span class='va'>amrs</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [[1]]</span>
 <span class='r-plt'><img src='simulateData-1.png' alt='' width='700' height='433' /></span>

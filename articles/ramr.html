@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -264,7 +264,7 @@ mcols(data.ranges) &lt;- data.betas
 
 <span class="co"># non-unique AMRs outside of regions with unique AMRs</span>
   <span class="va">amrs.nonunique</span> <span class="op">&lt;-</span>
-    <span class="fu"><a href="../reference/simulateAMR.html">simulateAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">3</span>, exclude.ranges<span class="op">=</span><span class="va">amrs.unique</span>,
+    <span class="fu"><a href="../reference/simulateAMR.html">simulateAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">4</span>, exclude.ranges<span class="op">=</span><span class="va">amrs.unique</span>,
                 samples.per.region<span class="op">=</span><span class="fl">2</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span><span class="op">)</span>
   
 <span class="co"># random noise outside of AMR regions</span>
@@ -276,14 +276,14 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co"># "smooth" methylation data without AMRs (negative control)</span>
   <span class="va">smooth.data</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Simulating data [1.132s]</span>
+<span class="co">#&gt; Simulating data [1.125s]</span>
   
 <span class="co"># methylation data with AMRs and noise</span>
   <span class="va">noisy.data</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>,
                  amr.ranges<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span>, <span class="va">noise</span><span class="op">)</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Simulating data [1.103s]</span>
-<span class="co">#&gt; Introducing epimutations [2.384s]</span>
+<span class="co">#&gt; Simulating data [1.056s]</span>
+<span class="co">#&gt; Introducing epimutations [2.371s]</span>
   
 <span class="co"># that's how regions look like</span>
   <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
@@ -294,13 +294,13 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     combine</span>
 
-  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="va">amrs.unique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, amr.ranges<span class="op">=</span><span class="va">amrs.unique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ramr_files/figure-html/unnamed-chunk-3-1.png" width="100%" height="100%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, amr.ranges<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ramr_files/figure-html/unnamed-chunk-3-2.png" width="100%" height="100%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, <span class="cn">NULL</span>, <span class="va">noise</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, amr.ranges<span class="op">=</span><span class="va">noise</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; geom_path: Each group consists of only one observation. Do you need to adjust the group</span>
 <span class="co">#&gt; aesthetic?</span></code></pre></div>
 <p><img src="ramr_files/figure-html/unnamed-chunk-3-3.png" width="100%" height="100%"></p>
@@ -309,28 +309,34 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co"># can we find them?</span>
   <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">found</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                               merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-2</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Identifying AMRs [4.360s]</span>
+<span class="co">#&gt; Identifying AMRs [4.288s]</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   7.097   0.863   4.537</span>
+<span class="co">#&gt;   7.004   0.776   4.453</span>
   
 <span class="co"># all possible regions</span>
   <span class="va">all.ranges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getUniverse.html">getUniverse</a></span><span class="op">(</span><span class="va">noisy.data</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span><span class="op">)</span>
   
 <span class="co"># true positives</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">found</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%over%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 56</span>
+  <span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">found</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%over%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
   
 <span class="co"># false positives</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">found</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0</span>
+  <span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">found</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># true negatives</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">all.ranges</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 206</span>
+  <span class="va">tn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">all.ranges</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span><span class="op">)</span>
   
 <span class="co"># false negatives</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="va">found</span><span class="op">)</span>
-<span class="co">#&gt; [1] 1</span></code></pre></div>
+  <span class="va">fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/IRanges/man/findOverlaps-methods.html" class="external-link">%outside%</a></span> <span class="va">found</span><span class="op">)</span>
+  
+<span class="co"># accuracy, MCC</span>
+  <span class="va">acc</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">tp</span><span class="op">+</span><span class="va">tn</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">tp</span><span class="op">+</span><span class="va">tn</span><span class="op">+</span><span class="va">fp</span><span class="op">+</span><span class="va">fn</span><span class="op">)</span>
+  <span class="va">mcc</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">tp</span><span class="op">*</span><span class="va">tn</span> <span class="op">-</span> <span class="va">fp</span><span class="op">*</span><span class="va">fn</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">tp</span><span class="op">+</span><span class="va">fp</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">tp</span><span class="op">+</span><span class="va">fn</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">tn</span><span class="op">+</span><span class="va">fp</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">tn</span><span class="op">+</span><span class="va">fn</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tp</span>, <span class="va">fp</span>, <span class="va">tn</span>, <span class="va">fn</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP"</span>, <span class="st">"FP"</span>, <span class="st">"TN"</span>, <span class="st">"FN"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;  TP  FP  TN  FN </span>
+<span class="co">#&gt;  57   0 206   1</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">acc</span>, <span class="va">mcc</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"accuracy"</span>, <span class="st">"MCC"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;  accuracy       MCC </span>
+<span class="co">#&gt; 0.9962121 0.9889444</span></code></pre></div>
 </div>
 <div id="amr-identification" class="section level1">
 <h1 class="hasAnchor">
@@ -340,7 +346,7 @@ mcols(data.ranges) &lt;- data.betas
 <code class="sourceCode R"><span class="co"># identify AMRs</span>
 <span class="va">amrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, <span class="va">ramr.samples</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-3</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Identifying AMRs [12.997s]</span>
+<span class="co">#&gt; Identifying AMRs [13.363s]</span>
 
 <span class="co"># inspect</span>
 <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">amrs</span><span class="op">)</span>
@@ -482,7 +488,7 @@ runLOLA(amrs, universe, hg19.coredb, cores=1, redefineUserSets=TRUE)</code></pre
 <span class="co">#&gt;  [1] org.Hs.eg.db_3.13.0                     TxDb.Hsapiens.UCSC.hg19.knownGene_3.2.2</span>
 <span class="co">#&gt;  [3] GenomicFeatures_1.45.0                  AnnotationDbi_1.55.0                   </span>
 <span class="co">#&gt;  [5] Biobase_2.53.0                          annotatr_1.19.0                        </span>
-<span class="co">#&gt;  [7] gridExtra_2.3                           ramr_1.1.0                             </span>
+<span class="co">#&gt;  [7] gridExtra_2.3                           ramr_1.1.2                             </span>
 <span class="co">#&gt;  [9] doRNG_1.8.2                             rngtools_1.5                           </span>
 <span class="co">#&gt; [11] doParallel_1.0.16                       iterators_1.0.13                       </span>
 <span class="co">#&gt; [13] foreach_1.5.1                           GenomicRanges_1.45.0                   </span>

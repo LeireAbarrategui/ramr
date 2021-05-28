@@ -86,7 +86,7 @@ methylated regions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -250,10 +250,10 @@ usage and sample data.</p></div>
 <span class='r-in'>  <span class='va'>noisy.data</span> <span class='op'>&lt;-</span></span>
 <span class='r-in'>    <span class='fu'>simulateData</span><span class='op'>(</span><span class='va'>ramr.data</span>, nsamples<span class='op'>=</span><span class='fl'>10</span>, amr.ranges<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='va'>amrs</span>,<span class='va'>noise</span><span class='op'>)</span>, cores<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Simulating data</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [1.120s]</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [1.108s]</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Introducing epimutations</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [1.049s]</span>
-<span class='r-in'>  <span class='fu'><a href='plotAMR.html'>plotAMR</a></span><span class='op'>(</span><span class='va'>noisy.data</span>, <span class='cn'>NULL</span>, <span class='va'>amrs</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [1.016s]</span>
+<span class='r-in'>  <span class='fu'><a href='plotAMR.html'>plotAMR</a></span><span class='op'>(</span><span class='va'>noisy.data</span>, amr.ranges<span class='op'>=</span><span class='va'>amrs</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [[1]]</span>
 <span class='r-plt'><img src='simulateData-1.png' alt='' width='700' height='433' /></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>

@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Merges, filters and outputs all genomic regions of a given `GRanges` object — getUniverse" />
-<meta property="og:description" content="`getUniverse` returns a GRanges object with all the genomic regions in a
+<meta property="og:description" content="`getUniverse` returns a `GRanges` object with all the genomic regions in a
 dataset, that can be used for AMR enrichment analysis" />
 
 
@@ -82,7 +82,7 @@ dataset, that can be used for AMR enrichment analysis" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -121,7 +121,7 @@ dataset, that can be used for AMR enrichment analysis" />
     </div>
 
     <div class="ref-description">
-    <p>`getUniverse` returns a GRanges object with all the genomic regions in a
+    <p>`getUniverse` returns a `GRanges` object with all the genomic regions in a
 dataset, that can be used for AMR enrichment analysis</p>
     </div>
 
@@ -137,7 +137,7 @@ corresponding beta values included as metadata.</p></td>
     </tr>
     <tr>
       <th>merge.window</th>
-      <td><p>A positive integer. All `data.ranges` genomic locations
+      <td><p>A single integer &gt;= 1. All `data.ranges` genomic locations
 within this distance will be merged (the default: 300).</p></td>
     </tr>
     <tr>
@@ -176,7 +176,7 @@ and `ramr` vignettes for the description of usage and sample data.</p></div>
 <span class='r-in'>  <span class='va'>amrs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='getAMR.html'>getAMR</a></span><span class='op'>(</span><span class='va'>ramr.data</span>, <span class='va'>ramr.samples</span>, ramr.method<span class='op'>=</span><span class='st'>"beta"</span>, min.cpgs<span class='op'>=</span><span class='fl'>5</span>,</span>
 <span class='r-in'>                 merge.window<span class='op'>=</span><span class='fl'>1000</span>, qval.cutoff<span class='op'>=</span><span class='fl'>1e-3</span>, cores<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Identifying AMRs</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [13.886s]</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [13.822s]</span>
 <span class='r-in'></span>
 <span class='r-in'>  <span class='co'># AMR enrichment analysis using LOLA</span></span>
 <span class='r-in'>  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://code.databio.org/LOLA'>LOLA</a></span><span class='op'>)</span></span>

@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
 <p><em><code>ramr</code></em> is an R package for detection of low-frequency aberrant methylation events in large datasets obtained by methylation profiling using array or high-throughput bisulfite sequencing. In addition, package provides functions to visualize found aberrantly methylated regions (AMRs), to generate sets of all possible regions to be used as reference sets for enrichment analysis, and to generate biologically relevant test datasets for performance evaluation of AMR/DMR search algorithms.</p>
-<p>This readme contains condensed info on <em><code>ramr</code></em> usage. For more, please check function-specific help pages and vignettes.</p>
+<p>This readme contains condensed info on <em><code>ramr</code></em> usage. For more, please check function-specific help pages and vignettes within the R environment or at <a href="https://bbcg.github.io/ramr/articles/ramr.html" class="external-link">GitHub pages</a>.</p>
 <div id="current-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#current-features" class="anchor" aria-hidden="true"></a>Current Features</h2>
@@ -186,12 +186,12 @@
   
 <span class="co"># that's how regions look like</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">data.with.amrs</span>, <span class="cn">NULL</span>, <span class="va">amrs.unique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">data.with.amrs</span>, amr.ranges<span class="op">=</span><span class="va">amrs.unique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The input (or template) object may be obtained using data from various sources. Here we provide two examples:</p>
 <div id="using-data-from-ncbi-geo" class="section level3">
 <h3 class="hasAnchor">
 <a href="#using-data-from-ncbi-geo" class="anchor" aria-hidden="true"></a>Using data from NCBI GEO</h3>
-<p>The following code pulls (NB: very large) raw files from NCBI GEO database, performes normalization and creates <em><code>GRanges</code></em> object for further analysis using <em><code>ramr</code></em> (system requirements: 22GB of disk space, 64GB of RAM)</p>
+<p>The following code pulls (NB: very large) raw files from NCBI GEO database, performs normalization and creates <em><code>GRanges</code></em> object for further analysis using <em><code>ramr</code></em> (system requirements: 22GB of disk space, 64GB of RAM)</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">minfi</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">GEOquery</span><span class="op">)</span>

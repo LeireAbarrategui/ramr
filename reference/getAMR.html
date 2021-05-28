@@ -82,7 +82,7 @@ regions (AMRs) for all samples in a dataset." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -254,7 +254,7 @@ distribution are estimated by means of `EnvStats::ebeta` or `ExtDist::eBeta`
 functions, and then used to calculate the probability values, followed by the
 filtering when all CpGs with p-values not greater than `qval.cutoff` are
 retained. Another filtering is then performed to exclude all CpGs within
-`exclude.range`. Next, the retained (significant) CpGs are merged with
+`exclude.range`. Next, the retained (significant) CpGs are merged within
 the window of `merge.window`, and final filtering is applied to AMR genomic
 ranges (by `min.cpgs` and `min.width`).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -269,7 +269,7 @@ and `ramr` vignettes for the description of usage and sample data.</p></div>
 <span class='r-in'>  <span class='fu'>getAMR</span><span class='op'>(</span><span class='va'>ramr.data</span>, <span class='va'>ramr.samples</span>, ramr.method<span class='op'>=</span><span class='st'>"beta"</span>,</span>
 <span class='r-in'>         min.cpgs<span class='op'>=</span><span class='fl'>5</span>, merge.window<span class='op'>=</span><span class='fl'>1000</span>, qval.cutoff<span class='op'>=</span><span class='fl'>1e-3</span>, cores<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Identifying AMRs</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [13.746s]</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [13.354s]</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> GRanges object with 22 ranges and 5 metadata columns:</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>        seqnames          ranges strand |             revmap      ncpg</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>           &lt;Rle&gt;       &lt;IRanges&gt;  &lt;Rle&gt; |             &lt;list&gt; &lt;integer&gt;</span>

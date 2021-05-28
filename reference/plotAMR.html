@@ -82,7 +82,7 @@ at particular genomic locations." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -128,7 +128,7 @@ at particular genomic locations.</p>
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>plotAMR</span><span class='op'>(</span>
   <span class='va'>data.ranges</span>,
   data.samples <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>ramr.ranges</span>,
+  <span class='va'>amr.ranges</span>,
   highlight <span class='op'>=</span> <span class='cn'>NULL</span>,
   title <span class='op'>=</span> <span class='cn'>NULL</span>,
   window <span class='op'>=</span> <span class='fl'>300</span>
@@ -149,7 +149,7 @@ metadata column names) to be included in the plot. If `NULL` (the default),
 then all samples (metadata columns) are included.</p></td>
     </tr>
     <tr>
-      <th>ramr.ranges</th>
+      <th>amr.ranges</th>
       <td><p>An output of `getAMR` - a `GRanges` object that contain
 aberrantly methylated regions (AMRs).</p></td>
     </tr>
@@ -157,7 +157,7 @@ aberrantly methylated regions (AMRs).</p></td>
       <th>highlight</th>
       <td><p>An optional list of samples to highlight. If NULL (the
 default), will contain sample IDs from the `sample` metadata column of
-`ramr.ranges` object.</p></td>
+`amr.ranges` object.</p></td>
     </tr>
     <tr>
       <th>title</th>
@@ -167,7 +167,7 @@ title is set to a genomic location of particular AMR.</p></td>
     <tr>
       <th>window</th>
       <td><p>An optional integer constant to expand genomic ranges of the
-`ramr.ranges` object (the default: 300).</p></td>
+`amr.ranges` object (the default: 300).</p></td>
     </tr>
     </table>
 
@@ -176,11 +176,11 @@ title is set to a genomic location of particular AMR.</p></td>
     <p>The output is a list of `ggplot` objects.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For every non-overlapping genomic location from `ramr.ranges` object,
+    <p>For every non-overlapping genomic location from `amr.ranges` object,
 `plotAMR` plots and outputs a line graph of methylation beta values taken
 from `data.ranges` for all samples from `data.samples`. Samples bearing
 significantly different methylation profiles ('sample' column of
-`ramr.ranges` object) are highlighted.</p>
+`amr.ranges` object) are highlighted.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='getAMR.html'>getAMR</a></code> for identification of AMRs,

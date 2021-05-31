@@ -69,7 +69,7 @@
       <h1 data-toc-skip>The ramr User’s Guide</h1>
                         <h4 data-toc-skip class="author">Oleksii Nikolaienko</h4>
             
-            <h4 data-toc-skip class="date">28 May, 2021</h4>
+            <h4 data-toc-skip class="date">31 May, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/BBCG/ramr/blob/master/vignettes/ramr.Rmd" class="external-link"><code>vignettes/ramr.Rmd</code></a></small>
       <div class="hidden name"><code>ramr.Rmd</code></div>
@@ -276,14 +276,14 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co"># "smooth" methylation data without AMRs (negative control)</span>
   <span class="va">smooth.data</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Simulating data [1.125s]</span>
+<span class="co">#&gt; Simulating data [1.063s]</span>
   
 <span class="co"># methylation data with AMRs and noise</span>
   <span class="va">noisy.data</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>,
                  amr.ranges<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span>, <span class="va">noise</span><span class="op">)</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Simulating data [1.056s]</span>
-<span class="co">#&gt; Introducing epimutations [2.371s]</span>
+<span class="co">#&gt; Simulating data [1.053s]</span>
+<span class="co">#&gt; Introducing epimutations [2.012s]</span>
   
 <span class="co"># that's how regions look like</span>
   <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
@@ -309,9 +309,9 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co"># can we find them?</span>
   <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">found</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                               merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-2</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Identifying AMRs [4.288s]</span>
+<span class="co">#&gt; Identifying AMRs [3.971s]</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   7.004   0.776   4.453</span>
+<span class="co">#&gt;   6.373   0.777   4.124</span>
   
 <span class="co"># all possible regions</span>
   <span class="va">all.ranges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getUniverse.html">getUniverse</a></span><span class="op">(</span><span class="va">noisy.data</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span><span class="op">)</span>
@@ -346,7 +346,7 @@ mcols(data.ranges) &lt;- data.betas
 <code class="sourceCode R"><span class="co"># identify AMRs</span>
 <span class="va">amrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, <span class="va">ramr.samples</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-3</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Identifying AMRs [13.363s]</span>
+<span class="co">#&gt; Identifying AMRs [11.825s]</span>
 
 <span class="co"># inspect</span>
 <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">amrs</span><span class="op">)</span>

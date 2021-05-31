@@ -176,7 +176,7 @@ considered to be significant (the default: 5).</p></td>
     <tr>
       <th>pval.cutoff</th>
       <td><p>A numeric scalar (the default: 5e-2). Bonferroni
-correction of `pval.cutoff` by the length of the `data.ranges` object is
+correction of `pval.cutoff` by the length of the `data.samples` object is
 used to calculate `qval.cutoff` if the latter is `NULL`.</p></td>
     </tr>
     <tr>
@@ -269,7 +269,7 @@ and `ramr` vignettes for the description of usage and sample data.</p></div>
 <span class='r-in'>  <span class='fu'>getAMR</span><span class='op'>(</span><span class='va'>ramr.data</span>, <span class='va'>ramr.samples</span>, ramr.method<span class='op'>=</span><span class='st'>"beta"</span>,</span>
 <span class='r-in'>         min.cpgs<span class='op'>=</span><span class='fl'>5</span>, merge.window<span class='op'>=</span><span class='fl'>1000</span>, qval.cutoff<span class='op'>=</span><span class='fl'>1e-3</span>, cores<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Identifying AMRs</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [13.354s]</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>  [11.947s]</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> GRanges object with 22 ranges and 5 metadata columns:</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>        seqnames          ranges strand |             revmap      ncpg</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>           &lt;Rle&gt;       &lt;IRanges&gt;  &lt;Rle&gt; |             &lt;list&gt; &lt;integer&gt;</span>

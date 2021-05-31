@@ -85,7 +85,7 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
-<p><em><code>ramr</code></em> is an R package for detection of low-frequency aberrant methylation events in large datasets obtained by methylation profiling using array or high-throughput bisulfite sequencing. In addition, package provides functions to visualize found aberrantly methylated regions (AMRs), to generate sets of all possible regions to be used as reference sets for enrichment analysis, and to generate biologically relevant test datasets for performance evaluation of AMR/DMR search algorithms.</p>
+<p><em><code>ramr</code></em> is an R package for detection of low-frequency aberrant methylation events in large data sets obtained by methylation profiling using array or high-throughput bisulfite sequencing. In addition, package provides functions to visualize found aberrantly methylated regions (AMRs), to generate sets of all possible regions to be used as reference sets for enrichment analysis, and to generate biologically relevant test data sets for performance evaluation of AMR/DMR search algorithms.</p>
 <div id="current-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#current-features" class="anchor" aria-hidden="true"></a>Current Features</h2>
@@ -93,7 +93,7 @@
 <li>Identification of aberrantly methylated regions (AMRs)</li>
 <li>AMR visualization</li>
 <li>Generation of reference sets for third-party analyses (e.g. enrichment)</li>
-<li>Generation of test datasets for performance evaluation of algorithms for search of differentially (DMR) or aberrantly (AMR) methylated regions</li>
+<li>Generation of test data sets for performance evaluation of algorithms for search of differentially (DMR) or aberrantly (AMR) methylated regions</li>
 </ul>
 </div>
 </div>
@@ -116,7 +116,7 @@
   cg19565306    chr22  51222011      * | 0.0719084295670266 0.0845209871264646 0.0689074604483659 ...
   cg09226288    chr22  51225561      * |  0.724145303755024  0.696281176451351  0.711459675603635 ...
 </code></pre>
-<p><em><code>ramr</code></em> package is supplied with a sample data, which was simulated using GSE51032 dataset as described in the <em><code>ramr</code></em> reference paper. Sample dataset <em><code>ramr.data</code></em> contains beta values for 10000 CpGs and 100 samples (<em><code>ramr.samples</code></em>), and carries 6 unique (<em><code>ramr.tp.unique</code></em>) and 15 non-unique (<em><code>ramr.tp.nonunique</code></em>) true positive AMRs containing at least 10 CpGs with their beta values increased/decreased by 0.5</p>
+<p><em><code>ramr</code></em> package is supplied with a sample data, which was simulated using GSE51032 data set as described in the <em><code>ramr</code></em> reference paper. Sample data set <em><code>ramr.data</code></em> contains beta values for 10000 CpGs and 100 samples (<em><code>ramr.samples</code></em>), and carries 6 unique (<em><code>ramr.tp.unique</code></em>) and 15 non-unique (<em><code>ramr.tp.nonunique</code></em>) true positive AMRs containing at least 10 CpGs with their beta values increased/decreased by 0.5</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/BBCG/ramr" class="external-link">ramr</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: GenomicRanges</span>
@@ -252,7 +252,7 @@ mcols(data.ranges) &lt;- data.betas
 <div id="simulating-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simulating-data" class="anchor" aria-hidden="true"></a>Simulating data</h1>
-<p><em><code>ramr</code></em> provides methods to create sets of random AMRs and to generate biologically relevant methylation beta values using real datasets as templates. The following code provides an example, however it is recommended to use a real experimental data (e.g. GSE51032) to create a test dataset for assessing the performance of <em><code>ramr</code></em> or other AMR/DMR search engines. The results of parallel data generation are fully reproducible when the same seed has been set (thanks to doRNG::%dorng%).</p>
+<p><em><code>ramr</code></em> provides methods to create sets of random AMRs and to generate biologically relevant methylation beta values using real data sets as templates. The following code provides an example, however it is recommended to use a real experimental data (e.g. GSE51032) to create a test data set for assessing the performance of <em><code>ramr</code></em> or other AMR/DMR search engines. The results of parallel data generation are fully reproducible when the same seed has been set (thanks to doRNG::%dorng%).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># set the seed if reproducible results required</span>
   <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">999</span><span class="op">)</span>
@@ -276,14 +276,14 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co"># "smooth" methylation data without AMRs (negative control)</span>
   <span class="va">smooth.data</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Simulating data [1.063s]</span>
+<span class="co">#&gt; Simulating data [1.065s]</span>
   
 <span class="co"># methylation data with AMRs and noise</span>
   <span class="va">noisy.data</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>,
                  amr.ranges<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span>, <span class="va">noise</span><span class="op">)</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Simulating data [1.053s]</span>
-<span class="co">#&gt; Introducing epimutations [2.012s]</span>
+<span class="co">#&gt; Simulating data [1.026s]</span>
+<span class="co">#&gt; Introducing epimutations [0.062s]</span>
   
 <span class="co"># that's how regions look like</span>
   <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
@@ -309,9 +309,9 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co"># can we find them?</span>
   <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">found</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                               merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-2</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Identifying AMRs [3.971s]</span>
+<span class="co">#&gt; Identifying AMRs [3.958s]</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   6.373   0.777   4.124</span>
+<span class="co">#&gt;   6.261   0.886   4.111</span>
   
 <span class="co"># all possible regions</span>
   <span class="va">all.ranges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getUniverse.html">getUniverse</a></span><span class="op">(</span><span class="va">noisy.data</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span><span class="op">)</span>
@@ -346,7 +346,7 @@ mcols(data.ranges) &lt;- data.betas
 <code class="sourceCode R"><span class="co"># identify AMRs</span>
 <span class="va">amrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, <span class="va">ramr.samples</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-3</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Identifying AMRs [11.825s]</span>
+<span class="co">#&gt; Identifying AMRs [11.456s]</span>
 
 <span class="co"># inspect</span>
 <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">amrs</span><span class="op">)</span>
@@ -442,7 +442,7 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co">#&gt; 7 hg19_genes_firstexons     8</span>
 <span class="co">#&gt; 8 hg19_genes_intergenic     1</span>
 <span class="co">#&gt; 9 hg19_genes_promoters      8</span></code></pre></div>
-<pre><code># generate the set of all possible genomic regions using sample dataset and
+<pre><code># generate the set of all possible genomic regions using sample data set and
 # the same parameters as for AMR search
 universe &lt;- getUniverse(ramr.data, min.cpgs=5, merge.window=1000)
 

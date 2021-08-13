@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.3</span>
       </span>
     </div>
 
@@ -63,13 +63,13 @@
 
       
 
-      </header><script src="ramr_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="ramr_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The ramr User’s Guide</h1>
                         <h4 data-toc-skip class="author">Oleksii Nikolaienko</h4>
             
-            <h4 data-toc-skip class="date">21 June, 2021</h4>
+            <h4 data-toc-skip class="date">13 August, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/BBCG/ramr/blob/master/vignettes/ramr.Rmd" class="external-link"><code>vignettes/ramr.Rmd</code></a></small>
       <div class="hidden name"><code>ramr.Rmd</code></div>
@@ -272,14 +272,14 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co"># "smooth" methylation data without AMRs (negative control)</span>
   <span class="va">smooth.data</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Simulating data [1.221s]</span>
+<span class="co">#&gt; Simulating data [0.910s]</span>
   
 <span class="co"># methylation data with AMRs and noise</span>
   <span class="va">noisy.data</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/simulateData.html">simulateData</a></span><span class="op">(</span><span class="va">ramr.data</span>, nsamples<span class="op">=</span><span class="fl">25</span>,
                  amr.ranges<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="va">amrs.unique</span>, <span class="va">amrs.nonunique</span>, <span class="va">noise</span><span class="op">)</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Simulating data [1.272s]</span>
-<span class="co">#&gt; Introducing epimutations [0.087s]</span>
+<span class="co">#&gt; Simulating data [0.886s]</span>
+<span class="co">#&gt; Introducing epimutations [0.056s]</span>
   
 <span class="co"># that's how regions look like</span>
   <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
@@ -305,9 +305,9 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co"># can we find them?</span>
   <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">found</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">noisy.data</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                               merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-2</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Identifying AMRs [4.688s]</span>
+<span class="co">#&gt; Identifying AMRs [3.348s]</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   7.733   0.832   4.867</span>
+<span class="co">#&gt;   5.286   0.789   3.486</span>
   
 <span class="co"># all possible regions</span>
   <span class="va">all.ranges</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getUniverse.html">getUniverse</a></span><span class="op">(</span><span class="va">noisy.data</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>, merge.window<span class="op">=</span><span class="fl">1000</span><span class="op">)</span>
@@ -342,7 +342,7 @@ mcols(data.ranges) &lt;- data.betas
 <code class="sourceCode R"><span class="co"># identify AMRs</span>
 <span class="va">amrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getAMR.html">getAMR</a></span><span class="op">(</span><span class="va">ramr.data</span>, <span class="va">ramr.samples</span>, ramr.method<span class="op">=</span><span class="st">"beta"</span>, min.cpgs<span class="op">=</span><span class="fl">5</span>,
                merge.window<span class="op">=</span><span class="fl">1000</span>, qval.cutoff<span class="op">=</span><span class="fl">1e-3</span>, cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Identifying AMRs [14.722s]</span>
+<span class="co">#&gt; Identifying AMRs [10.165s]</span>
 
 <span class="co"># inspect</span>
 <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">amrs</span><span class="op">)</span>
@@ -410,7 +410,7 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co">#&gt; Building exons...</span>
 <span class="co">#&gt; Building first exons...</span>
 <span class="co">#&gt; Building introns...</span>
-<span class="co">#&gt; snapshotDate(): 2021-06-15</span>
+<span class="co">#&gt; snapshotDate(): 2021-08-10</span>
 <span class="co">#&gt; Building CpG islands...</span>
 <span class="co">#&gt; loading from cache</span>
 <span class="co">#&gt; Building CpG shores...</span>
@@ -426,7 +426,7 @@ mcols(data.ranges) &lt;- data.betas
 <span class="co">#&gt; Warning: `group_by_()` was deprecated in dplyr 0.7.0.</span>
 <span class="co">#&gt; Please use `group_by()` instead.</span>
 <span class="co">#&gt; See vignette('programming') for more help</span>
-<span class="co">#&gt; # A tibble: 9 x 2</span>
+<span class="co">#&gt; # A tibble: 9 × 2</span>
 <span class="co">#&gt;   annot.type                n</span>
 <span class="co">#&gt;   &lt;chr&gt;                 &lt;int&gt;</span>
 <span class="co">#&gt; 1 hg19_cpg_inter            4</span>
@@ -452,12 +452,12 @@ runLOLA(amrs, universe, hg19.coredb, cores=1, redefineUserSets=TRUE)</code></pre
 <div id="citing-the-ramr-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citing-the-ramr-package" class="anchor" aria-hidden="true"></a>Citing the <em><code>ramr</code></em> package</h2>
-<p><a href="https://doi.org/10.1101/2020.12.01.403501" class="external-link">Nikolaienko et al., 2020 bioRxiv</a></p>
+<p>Oleksii Nikolaienko, Per Eystein Lønning, Stian Knappskog, <em>ramr</em>: an R/Bioconductor package for detection of rare aberrantly methylated regions, Bioinformatics, 2021;, btab586, <a href="https://doi.org/10.1093/bioinformatics/btab586" class="external-link">https://doi.org/10.1093/bioinformatics/btab586</a></p>
 </div>
 <div id="the-data-underlying-ramr-manuscript" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-data-underlying-ramr-manuscript" class="anchor" aria-hidden="true"></a>The data underlying <em><code>ramr</code></em> manuscript</h2>
-<p><a href="https://doi.org/10.18710/ED8HSD" class="external-link">Replication Data for: “ramr: an R package for detection of rare aberrantly methylated regions”</a></p>
+<p>Replication Data for: "ramr: an R package for detection of rare aberrantly methylated regions, <a href="https://doi.org/10.18710/ED8HSD" class="external-link">https://doi.org/10.18710/ED8HSD</a></p>
 </div>
 <div id="session-info" class="section level2">
 <h2 class="hasAnchor">
@@ -483,54 +483,53 @@ runLOLA(amrs, universe, hg19.coredb, cores=1, redefineUserSets=TRUE)</code></pre
 <span class="co">#&gt; other attached packages:</span>
 <span class="co">#&gt;  [1] org.Hs.eg.db_3.13.0                     TxDb.Hsapiens.UCSC.hg19.knownGene_3.2.2</span>
 <span class="co">#&gt;  [3] GenomicFeatures_1.45.0                  AnnotationDbi_1.55.1                   </span>
-<span class="co">#&gt;  [5] Biobase_2.53.0                          annotatr_1.19.0                        </span>
-<span class="co">#&gt;  [7] gridExtra_2.3                           ramr_1.1.2                             </span>
+<span class="co">#&gt;  [5] Biobase_2.53.0                          annotatr_1.19.1                        </span>
+<span class="co">#&gt;  [7] gridExtra_2.3                           ramr_1.1.3                             </span>
 <span class="co">#&gt;  [9] doRNG_1.8.2                             rngtools_1.5                           </span>
 <span class="co">#&gt; [11] doParallel_1.0.16                       iterators_1.0.13                       </span>
 <span class="co">#&gt; [13] foreach_1.5.1                           GenomicRanges_1.45.0                   </span>
-<span class="co">#&gt; [15] GenomeInfoDb_1.29.0                     IRanges_2.27.0                         </span>
+<span class="co">#&gt; [15] GenomeInfoDb_1.29.3                     IRanges_2.27.0                         </span>
 <span class="co">#&gt; [17] S4Vectors_0.31.0                        BiocGenerics_0.39.1                    </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;   [1] colorspace_2.0-1              rjson_0.2.20                  ellipsis_0.3.2               </span>
+<span class="co">#&gt;   [1] colorspace_2.0-2              rjson_0.2.20                  ellipsis_0.3.2               </span>
 <span class="co">#&gt;   [4] EnvStats_2.4.0                rprojroot_2.0.2               XVector_0.33.0               </span>
-<span class="co">#&gt;   [7] fs_1.5.0                      rstudioapi_0.13               farver_2.1.0                 </span>
-<span class="co">#&gt;  [10] bit64_4.0.5                   interactiveDisplayBase_1.31.0 fansi_0.5.0                  </span>
-<span class="co">#&gt;  [13] xml2_1.3.2                    codetools_0.2-18              cachem_1.0.5                 </span>
-<span class="co">#&gt;  [16] knitr_1.33                    jsonlite_1.7.2                Rsamtools_2.9.1              </span>
-<span class="co">#&gt;  [19] dbplyr_2.1.1                  png_0.1-7                     shiny_1.6.0                  </span>
-<span class="co">#&gt;  [22] readr_1.4.0                   BiocManager_1.30.16           compiler_4.1.0               </span>
-<span class="co">#&gt;  [25] httr_1.4.2                    Matrix_1.3-4                  assertthat_0.2.1             </span>
-<span class="co">#&gt;  [28] fastmap_1.1.0                 cli_2.5.0                     later_1.2.0                  </span>
-<span class="co">#&gt;  [31] htmltools_0.5.1.1             prettyunits_1.1.1             tools_4.1.0                  </span>
-<span class="co">#&gt;  [34] gtable_0.3.0                  glue_1.4.2                    GenomeInfoDbData_1.2.6       </span>
-<span class="co">#&gt;  [37] reshape2_1.4.4                dplyr_1.0.6                   rappdirs_0.3.3               </span>
-<span class="co">#&gt;  [40] Rcpp_1.0.6                    jquerylib_0.1.4               pkgdown_1.6.1.9001           </span>
-<span class="co">#&gt;  [43] vctrs_0.3.8                   Biostrings_2.61.1             rtracklayer_1.53.0           </span>
-<span class="co">#&gt;  [46] xfun_0.24                     stringr_1.4.0                 ps_1.6.0                     </span>
-<span class="co">#&gt;  [49] mime_0.10                     lifecycle_1.0.0               restfulr_0.0.13              </span>
-<span class="co">#&gt;  [52] XML_3.99-0.6                  AnnotationHub_3.1.1           zlibbioc_1.39.0              </span>
-<span class="co">#&gt;  [55] scales_1.1.1                  BSgenome_1.61.0               MatrixGenerics_1.5.0         </span>
-<span class="co">#&gt;  [58] ragg_1.1.3                    hms_1.1.0                     promises_1.2.0.1             </span>
-<span class="co">#&gt;  [61] SummarizedExperiment_1.23.0   yaml_2.2.1                    curl_4.3.1                   </span>
-<span class="co">#&gt;  [64] memoise_2.0.0                 ggplot2_3.3.4                 sass_0.4.0                   </span>
-<span class="co">#&gt;  [67] biomaRt_2.49.1                stringi_1.6.2                 RSQLite_2.2.7                </span>
-<span class="co">#&gt;  [70] BiocVersion_3.14.0            highr_0.9                     BiocIO_1.3.0                 </span>
-<span class="co">#&gt;  [73] desc_1.3.0                    filelock_1.0.2                optimx_2021-6.12             </span>
-<span class="co">#&gt;  [76] BiocParallel_1.27.0           rlang_0.4.11                  pkgconfig_2.0.3              </span>
-<span class="co">#&gt;  [79] systemfonts_1.0.2             matrixStats_0.59.0            bitops_1.0-7                 </span>
-<span class="co">#&gt;  [82] lattice_0.20-44               evaluate_0.14                 purrr_0.3.4                  </span>
-<span class="co">#&gt;  [85] GenomicAlignments_1.29.0      labeling_0.4.2                bit_4.0.4                    </span>
-<span class="co">#&gt;  [88] tidyselect_1.1.1              plyr_1.8.6                    magrittr_2.0.1               </span>
-<span class="co">#&gt;  [91] R6_2.5.0                      generics_0.1.0                DelayedArray_0.19.0          </span>
-<span class="co">#&gt;  [94] DBI_1.1.1                     withr_2.4.2                   pillar_1.6.1                 </span>
-<span class="co">#&gt;  [97] KEGGREST_1.33.0               RCurl_1.98-1.3                tibble_3.1.2                 </span>
-<span class="co">#&gt; [100] crayon_1.4.1                  utf8_1.2.1                    BiocFileCache_2.1.0          </span>
-<span class="co">#&gt; [103] rmarkdown_2.9                 progress_1.2.2                ExtDist_0.6-4                </span>
-<span class="co">#&gt; [106] grid_4.1.0                    blob_1.2.1                    digest_0.6.27                </span>
-<span class="co">#&gt; [109] xtable_1.8-4                  regioneR_1.25.0               httpuv_1.6.1                 </span>
-<span class="co">#&gt; [112] numDeriv_2016.8-1.1           textshaping_0.3.5             munsell_0.5.0                </span>
-<span class="co">#&gt; [115] bslib_0.2.5.1</span></code></pre></div>
+<span class="co">#&gt;   [7] fs_1.5.0                      farver_2.1.0                  bit64_4.0.5                  </span>
+<span class="co">#&gt;  [10] interactiveDisplayBase_1.31.2 fansi_0.5.0                   xml2_1.3.2                   </span>
+<span class="co">#&gt;  [13] codetools_0.2-18              cachem_1.0.5                  knitr_1.33                   </span>
+<span class="co">#&gt;  [16] jsonlite_1.7.2                Rsamtools_2.9.1               dbplyr_2.1.1                 </span>
+<span class="co">#&gt;  [19] png_0.1-7                     shiny_1.6.0                   readr_2.0.0                  </span>
+<span class="co">#&gt;  [22] BiocManager_1.30.16           compiler_4.1.0                httr_1.4.2                   </span>
+<span class="co">#&gt;  [25] Matrix_1.3-4                  assertthat_0.2.1              fastmap_1.1.0                </span>
+<span class="co">#&gt;  [28] cli_3.0.1                     later_1.2.0                   htmltools_0.5.1.1            </span>
+<span class="co">#&gt;  [31] prettyunits_1.1.1             tools_4.1.0                   gtable_0.3.0                 </span>
+<span class="co">#&gt;  [34] glue_1.4.2                    GenomeInfoDbData_1.2.6        reshape2_1.4.4               </span>
+<span class="co">#&gt;  [37] dplyr_1.0.7                   rappdirs_0.3.3                Rcpp_1.0.7                   </span>
+<span class="co">#&gt;  [40] jquerylib_0.1.4               pkgdown_1.6.1.9001            vctrs_0.3.8                  </span>
+<span class="co">#&gt;  [43] Biostrings_2.61.2             rtracklayer_1.53.0            xfun_0.25                    </span>
+<span class="co">#&gt;  [46] stringr_1.4.0                 mime_0.11                     lifecycle_1.0.0              </span>
+<span class="co">#&gt;  [49] restfulr_0.0.13               XML_3.99-0.6                  AnnotationHub_3.1.5          </span>
+<span class="co">#&gt;  [52] zlibbioc_1.39.0               scales_1.1.1                  BSgenome_1.61.0              </span>
+<span class="co">#&gt;  [55] MatrixGenerics_1.5.3          ragg_1.1.3                    hms_1.1.0                    </span>
+<span class="co">#&gt;  [58] promises_1.2.0.1              SummarizedExperiment_1.23.1   yaml_2.2.1                   </span>
+<span class="co">#&gt;  [61] curl_4.3.2                    memoise_2.0.0                 ggplot2_3.3.5                </span>
+<span class="co">#&gt;  [64] sass_0.4.0                    biomaRt_2.49.4                stringi_1.7.3                </span>
+<span class="co">#&gt;  [67] RSQLite_2.2.7                 BiocVersion_3.14.0            highr_0.9                    </span>
+<span class="co">#&gt;  [70] BiocIO_1.3.0                  desc_1.3.0                    filelock_1.0.2               </span>
+<span class="co">#&gt;  [73] optimx_2021-6.12              BiocParallel_1.27.3           rlang_0.4.11                 </span>
+<span class="co">#&gt;  [76] pkgconfig_2.0.3               systemfonts_1.0.2             matrixStats_0.60.0           </span>
+<span class="co">#&gt;  [79] bitops_1.0-7                  lattice_0.20-44               evaluate_0.14                </span>
+<span class="co">#&gt;  [82] purrr_0.3.4                   GenomicAlignments_1.29.0      labeling_0.4.2               </span>
+<span class="co">#&gt;  [85] bit_4.0.4                     tidyselect_1.1.1              plyr_1.8.6                   </span>
+<span class="co">#&gt;  [88] magrittr_2.0.1                R6_2.5.0                      generics_0.1.0               </span>
+<span class="co">#&gt;  [91] DelayedArray_0.19.1           DBI_1.1.1                     withr_2.4.2                  </span>
+<span class="co">#&gt;  [94] pillar_1.6.2                  KEGGREST_1.33.0               RCurl_1.98-1.3               </span>
+<span class="co">#&gt;  [97] tibble_3.1.3                  crayon_1.4.1                  utf8_1.2.2                   </span>
+<span class="co">#&gt; [100] BiocFileCache_2.1.1           tzdb_0.1.2                    rmarkdown_2.10               </span>
+<span class="co">#&gt; [103] progress_1.2.2                ExtDist_0.6-4                 grid_4.1.0                   </span>
+<span class="co">#&gt; [106] blob_1.2.2                    digest_0.6.27                 xtable_1.8-4                 </span>
+<span class="co">#&gt; [109] regioneR_1.25.1               httpuv_1.6.1                  numDeriv_2016.8-1.1          </span>
+<span class="co">#&gt; [112] textshaping_0.3.5             munsell_0.5.0                 bslib_0.2.5.1</span></code></pre></div>
 </div>
 </div>
 <div id="references" class="section level1">

@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ramr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.1</span>
       </span>
     </div>
 
@@ -54,7 +54,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/BBCG/ramr/">
+  <a href="https://github.com/BBCG/ramr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -72,42 +72,42 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="ramr" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#ramr" class="anchor" aria-hidden="true"></a>ramr</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="ramr">ramr<a class="anchor" aria-label="anchor" href="#ramr"></a>
+</h1></div>
 
 </div>
-<div id="introduction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
+<div class="section level1">
+<h1 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h1>
 <p><em><code>ramr</code></em> is an R package for detection of low-frequency aberrant methylation events in large data sets obtained by methylation profiling using array or high-throughput bisulfite sequencing. In addition, package provides functions to visualize found aberrantly methylated regions (AMRs), to generate sets of all possible regions to be used as reference sets for enrichment analysis, and to generate biologically relevant test data sets for performance evaluation of AMR/DMR search algorithms.</p>
 <p>This readme contains condensed info on <em><code>ramr</code></em> usage. For more, please check function-specific help pages and vignettes within the R environment or at <a href="https://bbcg.github.io/ramr/articles/ramr.html" class="external-link">GitHub pages</a>.</p>
-<div id="current-features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#current-features" class="anchor" aria-hidden="true"></a>Current Features</h2>
+<div class="section level2">
+<h2 id="current-features">Current Features<a class="anchor" aria-label="anchor" href="#current-features"></a>
+</h2>
 <ul>
 <li>Identification of aberrantly methylated regions (AMRs)</li>
 <li>AMR visualization</li>
-<li>Generation of reference sets for third-party analyses (e.g.Â enrichment)</li>
+<li>Generation of reference sets for third-party analyses (e.g. enrichment)</li>
 <li>Generation of test data sets for performance evaluation of algorithms for search of differentially (DMR) or aberrantly (AMR) methylated regions</li>
 </ul>
 <hr>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
-<div id="install-via-bioconductor" class="section level3">
-<h3 class="hasAnchor">
-<a href="#install-via-bioconductor" class="anchor" aria-hidden="true"></a>install via Bioconductor</h3>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<div class="section level3">
+<h3 id="install-via-bioconductor">install via Bioconductor<a class="anchor" aria-label="anchor" href="#install-via-bioconductor"></a>
+</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
 
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"ramr"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="install-the-latest-version-via-install_github" class="section level3">
-<h3 class="hasAnchor">
-<a href="#install-the-latest-version-via-install_github" class="anchor" aria-hidden="true"></a>Install the latest version via install_github</h3>
+<div class="section level3">
+<h3 id="install-the-latest-version-via-install_github">Install the latest version via install_github<a class="anchor" aria-label="anchor" href="#install-the-latest-version-via-install_github"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"BBCG/ramr"</span>, build_vignettes<span class="op">=</span><span class="cn">FALSE</span>,
@@ -115,28 +115,29 @@
   dependencies<span class="op">=</span><span class="cn">TRUE</span>, type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></code></pre></div>
 <hr>
 </div>
-<div id="citing-the-ramr-package" class="section level3">
-<h3 class="hasAnchor">
-<a href="#citing-the-ramr-package" class="anchor" aria-hidden="true"></a>Citing the <em><code>ramr</code></em> package</h3>
-<p>Oleksii Nikolaienko, Per Eystein LÃ¸nning, Stian Knappskog, <em>ramr</em>: an R/Bioconductor package for detection of rare aberrantly methylated regions, Bioinformatics, 2021;, btab586, <a href="https://doi.org/10.1093/bioinformatics/btab586" class="external-link">https://doi.org/10.1093/bioinformatics/btab586</a></p>
+<div class="section level3">
+<h3 id="citing-the-ramr-package">Citing the <em><code>ramr</code></em> package<a class="anchor" aria-label="anchor" href="#citing-the-ramr-package"></a>
+</h3>
+<p>Oleksii Nikolaienko, Per Eystein Lønning, Stian Knappskog, <em>ramr</em>: an R/Bioconductor package for detection of rare aberrantly methylated regions, Bioinformatics, 2021;, btab586, <a href="https://doi.org/10.1093/bioinformatics/btab586" class="external-link">https://doi.org/10.1093/bioinformatics/btab586</a></p>
 </div>
-<div id="the-data-underlying-ramr-manuscript" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-data-underlying-ramr-manuscript" class="anchor" aria-hidden="true"></a>The data underlying <em><code>ramr</code></em> manuscript</h3>
-<p>Replication Data for: âramr: an R package for detection of rare aberrantly methylated regions, <a href="https://doi.org/10.18710/ED8HSD" class="external-link">https://doi.org/10.18710/ED8HSD</a></p>
+<div class="section level3">
+<h3 id="the-data-underlying-ramr-manuscript">The data underlying <em><code>ramr</code></em> manuscript<a class="anchor" aria-label="anchor" href="#the-data-underlying-ramr-manuscript"></a>
+</h3>
+<p>Replication Data for: “ramr: an R package for detection of rare aberrantly methylated regions, <a href="https://doi.org/10.18710/ED8HSD" class="external-link">https://doi.org/10.18710/ED8HSD</a></p>
 </div>
-<div id="ramr-at-bioconductor" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ramr-at-bioconductor" class="anchor" aria-hidden="true"></a><em><code>ramr</code></em> at Bioconductor</h3>
+<div class="section level3">
+<h3 id="ramr-at-bioconductor">
+<em><code>ramr</code></em> at Bioconductor<a class="anchor" aria-label="anchor" href="#ramr-at-bioconductor"></a>
+</h3>
 <p><a href="https://bioconductor.org/packages/release/bioc/html/ramr.html" class="external-link">release</a>, <a href="https://bioconductor.org/packages/devel/bioc/html/ramr.html" class="external-link">development version</a></p>
 <hr>
 </div>
 </div>
 </div>
-<div id="how-to-use" class="section level1">
-<h1 class="hasAnchor">
-<a href="#how-to-use" class="anchor" aria-hidden="true"></a>How to Use</h1>
-<p>Please read package vignettes at <a href="https://bbcg.github.io/ramr/articles/ramr.html" class="external-link">GitHub pages</a> or within the R environment: <code><a href="articles/ramr.html">vignette("ramr", package="ramr")</a></code>, or consult the functionâs help pages for the extensive information on usage, parameters and output values.</p>
+<div class="section level1">
+<h1 id="how-to-use">How to Use<a class="anchor" aria-label="anchor" href="#how-to-use"></a>
+</h1>
+<p>Please read package vignettes at <a href="https://bbcg.github.io/ramr/articles/ramr.html" class="external-link">GitHub pages</a> or within the R environment: <code><a href="articles/ramr.html">vignette("ramr", package="ramr")</a></code>, or consult the function’s help pages for the extensive information on usage, parameters and output values.</p>
 <p><em><code>ramr</code></em> methods operate on objects of the class <em><code>GRanges</code></em>. The input object for AMR search must in addition contain metadata columns with sample beta values. A typical input object looks like this:</p>
 <pre><code>GRanges object with 383788 ranges and 845 metadata columns:
              seqnames    ranges strand |         GSM1235534         GSM1235535         GSM1235536 ...
@@ -188,9 +189,9 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="reference/plotAMR.html">plotAMR</a></span><span class="op">(</span><span class="va">data.with.amrs</span>, amr.ranges<span class="op">=</span><span class="va">amrs.unique</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The input (or template) object may be obtained using data from various sources. Here we provide two examples:</p>
-<div id="using-data-from-ncbi-geo" class="section level3">
-<h3 class="hasAnchor">
-<a href="#using-data-from-ncbi-geo" class="anchor" aria-hidden="true"></a>Using data from NCBI GEO</h3>
+<div class="section level3">
+<h3 id="using-data-from-ncbi-geo">Using data from NCBI GEO<a class="anchor" aria-label="anchor" href="#using-data-from-ncbi-geo"></a>
+</h3>
 <p>The following code pulls (NB: very large) raw files from NCBI GEO database, performs normalization and creates <em><code>GRanges</code></em> object for further analysis using <em><code>ramr</code></em> (system requirements: 22GB of disk space, 64GB of RAM)</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">minfi</span><span class="op">)</span>
@@ -225,9 +226,9 @@
 
 <span class="co"># data.ranges and sample.ids objects are now ready for AMR search using ramr</span></code></pre></div>
 </div>
-<div id="using-bismark-cytosine-report-files" class="section level3">
-<h3 class="hasAnchor">
-<a href="#using-bismark-cytosine-report-files" class="anchor" aria-hidden="true"></a>Using Bismark cytosine report files</h3>
+<div class="section level3">
+<h3 id="using-bismark-cytosine-report-files">Using Bismark cytosine report files<a class="anchor" aria-label="anchor" href="#using-bismark-cytosine-report-files"></a>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">methylKit</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/GenomicRanges" class="external-link">GenomicRanges</a></span><span class="op">)</span>
@@ -261,9 +262,9 @@
 
 <span class="co"># data.ranges and sample.ids objects are now ready for AMR search using ramr</span></code></pre></div>
 </div>
-<div id="license" class="section level2">
-<h2 class="hasAnchor">
-<a href="#license" class="anchor" aria-hidden="true"></a>License</h2>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
 <p>Artistic License/GPL</p>
 </div>
 </div>
@@ -274,19 +275,16 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from BIOC at <br><a href="https://www.bioconductor.org/packages/ramr">https://​www.bioconductor.org/​packages/​ramr</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/BBCG/ramr/">https://​github.com/​BBCG/​ramr/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/BBCG/ramr/issues">https://​github.com/​BBCG/​ramr/​issues</a>
-</li>
+<li><a href="https://www.bioconductor.org/packages/ramr" class="external-link">View on Bioconductor</a></li>
+<li><a href="https://github.com/BBCG/ramr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/BBCG/ramr/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/Artistic-2.0">Artistic-2.0</a></li>
+<li><a href="https://www.r-project.org/Licenses/Artistic-2.0" class="external-link">Artistic-2.0</a></li>
 </ul>
 </div>
 
@@ -301,7 +299,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Oleksii Nikolaienko <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5910-4934" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Oleksii Nikolaienko <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5910-4934" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 

@@ -1,7 +1,7 @@
 pandoc: 2.14.0.3
 pkgdown: 1.9000.9000.9000
-pkgdown_sha: 3593f80b9a782b9d9dae1d2bff2306d728158854
+pkgdown_sha: e72fc30f333dc4f50f3f9d1f274fc29d67e34974
 articles:
   ramr: ramr.html
-last_built: 2021-10-04T12:19Z
+last_built: 2021-11-24T14:49Z
 

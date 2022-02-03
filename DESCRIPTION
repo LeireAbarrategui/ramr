@@ -16,7 +16,7 @@ Description: ramr is an R package for detection of low-frequency aberrant
     enrichment analysis, and to generate biologically relevant test data sets
     for performance evaluation of AMR/DMR search algorithms.
 Depends:
-    R (>= 4.1),
+    R (>= 4.0),
     GenomicRanges,
     parallel,
     doParallel,
